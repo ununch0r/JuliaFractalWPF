@@ -6,4 +6,24 @@
     <UseWPF>true</UseWPF>
   </PropertyGroup>
 
+  <ItemGroup>
+    <None Remove="fonts\BubblegumSans-Regular.ttf" />
+    <None Remove="images\color-palette.png" />
+    <None Remove="images\coordinates.png" />
+    <None Remove="images\fractal.png" />
+    <None Remove="images\logo.png" />
+    <None Remove="images\quiz.png" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Resource Include="fonts\BubblegumSans-Regular.ttf">
+      <CopyToOutputDirectory>Never</CopyToOutputDirectory>
+    </Resource>
+    <Resource Include="images\color-palette.png" />
+    <Resource Include="images\coordinates.png" />
+    <Resource Include="images\fractal.png" />
+    <Resource Include="images\logo.png" />
+    <Resource Include="images\quiz.png" />
+  </ItemGroup>
+
 </Project>
