@@ -8,22 +8,36 @@
 
   <ItemGroup>
     <None Remove="fonts\BubblegumSans-Regular.ttf" />
+    <None Remove="images\book.png" />
     <None Remove="images\color-palette.png" />
     <None Remove="images\coordinates.png" />
+    <None Remove="images\download.png" />
     <None Remove="images\fractal.png" />
+    <None Remove="images\home.png" />
     <None Remove="images\logo.png" />
+    <None Remove="images\question.png" />
     <None Remove="images\quiz.png" />
+    <None Remove="images\upload.png" />
+    <None Remove="images\zoom_in.png" />
+    <None Remove="images\zoom_out.png" />
   </ItemGroup>
 
   <ItemGroup>
     <Resource Include="fonts\BubblegumSans-Regular.ttf">
       <CopyToOutputDirectory>Never</CopyToOutputDirectory>
     </Resource>
+    <Resource Include="images\book.png" />
     <Resource Include="images\color-palette.png" />
     <Resource Include="images\coordinates.png" />
+    <Resource Include="images\download.png" />
     <Resource Include="images\fractal.png" />
+    <Resource Include="images\home.png" />
     <Resource Include="images\logo.png" />
+    <Resource Include="images\question.png" />
     <Resource Include="images\quiz.png" />
+    <Resource Include="images\upload.png" />
+    <Resource Include="images\zoom_in.png" />
+    <Resource Include="images\zoom_out.png" />
   </ItemGroup>
 
 </Project>

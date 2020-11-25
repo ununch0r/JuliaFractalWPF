@@ -53,7 +53,7 @@
                                 <ColumnDefinition Width="*"></ColumnDefinition>
                                 <ColumnDefinition Width="*"></ColumnDefinition>
                             </Grid.ColumnDefinitions>
-                            <Button Grid.Column="0" BorderThickness="1" BorderBrush="#36213E" Width="165" Height="135" Background="#D3F7FF">
+                            <Button x:Name="FractalsButton" Grid.Column="0" BorderThickness="1" BorderBrush="#36213E" Width="165" Height="135" Background="#D3F7FF" Click="FractalsButton_OnClick">
                                 <Button.Resources>
                                         <Style TargetType="Border">
                                             <Setter Property="CornerRadius" Value="15"/>
