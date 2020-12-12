@@ -1,5 +1,5 @@
-﻿using EasyGraphics.SubWindows;
-using System.Windows;
+﻿using System.Windows;
+using EasyGraphics.Views;
 
 namespace EasyGraphics
 {

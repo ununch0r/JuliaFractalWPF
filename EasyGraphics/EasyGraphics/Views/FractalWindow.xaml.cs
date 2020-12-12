@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.ComponentModel;
+using System.IO;
 using System.Linq;
 using System.Numerics;
 using System.Runtime.CompilerServices;
@@ -14,8 +15,9 @@ using EasyGraphics.Annotations;
 using EasyGraphics.EasyGraphicsColors;
 using EasyGraphics.Fractals.FractalStrategies;
 using EasyGraphics.Fractals.Interfaces;
+using Microsoft.Win32;
 
-namespace EasyGraphics.SubWindows
+namespace EasyGraphics.Views
 {
     /// <summary>
     /// Interaction logic for FractalWindow.xaml
@@ -167,20 +169,6 @@ namespace EasyGraphics.SubWindows
             // Render();
         }
 
-        private void FractalWindow_ContentRendered(object sender, EventArgs e)
-        {
-            BottomLeft = new Point(-4d, -4d);
-            TopRight = new Point(4d, 4d);
-
-            AdjustAspectRatio();
-
-            MaxIterations = 120;
-            ZoomLevel = 1;
-            SelectedColourMap = AvailableColorMaps[0].Item2;
-
-            _initDone = true;
-            DrawRandom();
-        }
 
         private void AdjustAspectRatio()
         {
@@ -358,6 +346,21 @@ namespace EasyGraphics.SubWindows
         {
             _selectedColorMap = AvailableColorMaps[ChangeColorBox.SelectedIndex].Item2;
             DrawRandom();
+        }
+
+        private void DownloadButton_OnClick(object sender, RoutedEventArgs e)
+        {
+            var saveFileDialog = new SaveFileDialog();
+            if (saveFileDialog.ShowDialog() == true)
+            {
+                var filePath = saveFileDialog.FileName;
+
+                var encoder = new PngBitmapEncoder();
+                encoder.Frames.Add(BitmapFrame.Create((BitmapSource)FractalImage.Source));
+                using var stream = new FileStream(filePath, FileMode.Create);
+
+                encoder.Save(stream);
+            }
         }
     }
 }

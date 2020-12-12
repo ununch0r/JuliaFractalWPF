@@ -34,7 +34,7 @@ namespace EasyGraphics.Fractals.FractalStrategies
         {
             foreach (var iterations in Enumerable.Range(0, maxIterations))
             {
-                z = 1 / Complex.Tan(z * z);
+                z = 1 / Complex.Tan(z* z);
                 if (z.Real * z.Real + z.Imaginary * z.Imaginary >= 4d) return (ushort)iterations;
             }
 

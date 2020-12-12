@@ -1,9 +1,8 @@
-﻿<Window x:Class="EasyGraphics.SubWindows.FractalWindow"
+﻿<Window x:Class="EasyGraphics.Views.RectangleMoveWindow"
         xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
-        xmlns:local="clr-namespace:EasyGraphics.SubWindows"
         mc:Ignorable="d"
         Title="MainWindow" Height="1024" Width="1440" MaxHeight="1024" MaxWidth="1440" 
         Background="Transparent">
@@ -48,7 +47,7 @@
                             </Grid>
                         </Border>
                         <TextBlock Grid.Column="1" FontSize="96" TextAlignment="Center" Style="{StaticResource BubblegumSans}"  VerticalAlignment="Center">
-                            Fractals
+                            Rectangle
                         </TextBlock>
                         <Image Grid.Column="2" Width="120" Height="106" VerticalAlignment="Center" HorizontalAlignment="Right" Margin="0 0 50 0">
                             <Image.Source>
@@ -63,42 +62,15 @@
                         <ColumnDefinition Width="0.66*"></ColumnDefinition>
                         <ColumnDefinition Width="0.17*"></ColumnDefinition>
                     </Grid.ColumnDefinitions>
-                    <Border CornerRadius ="15" Margin="20 100  0 40" Width="210"
+                    <Border CornerRadius ="15" Margin="20 60  0 0" Width="210"
                             Grid.Column="1" HorizontalAlignment="Left" Background="#63768D" BorderThickness="1" BorderBrush="#36213E">
                         <Grid x:Name="FractalSettings" >
-                            <Grid.RowDefinitions>
-                                <RowDefinition Height="1.5*"></RowDefinition>
-                                <RowDefinition Height="7*"></RowDefinition>
-                                <RowDefinition Height="1.5*"></RowDefinition>
-                            </Grid.RowDefinitions>
-                            <TextBlock Grid.Row="0" FontSize="48" TextAlignment="Center" Style="{StaticResource BubblegumSans}" HorizontalAlignment="Center"  VerticalAlignment="Center">
-                                Settings
-                            </TextBlock>
-                            <StackPanel Grid.Row="1" Orientation="Vertical" HorizontalAlignment="Center">
-                                <StackPanel Orientation="Horizontal">
-                                    <TextBlock FontSize="24" TextAlignment="Center" Style="{StaticResource BubblegumSans}" HorizontalAlignment="Center"  VerticalAlignment="Top">
-                                        Iterations
-                                    </TextBlock>
-                                </StackPanel>
-                                <TextBlock FontSize="12" TextAlignment="Center" Style="{StaticResource BubblegumSans}" HorizontalAlignment="Center">50</TextBlock>
-                                <Slider x:Name="MaxIterationsSlider" Orientation="Vertical" TickFrequency="5" TickPlacement="Both" Minimum="1" Maximum="50" Value="{Binding Path=MaxIterations}" Height="280" HorizontalAlignment="Center"/>
-                                <TextBlock FontSize="12" TextAlignment="Center" Style="{StaticResource BubblegumSans}" Margin="0 5 0 0" VerticalAlignment="Bottom" HorizontalAlignment="Center">1</TextBlock>
-                            </StackPanel>
-                            <Grid Row="2">
-                                <Grid.RowDefinitions>
-                                    <RowDefinition></RowDefinition>
-                                    <RowDefinition></RowDefinition>
-                                </Grid.RowDefinitions>
-                                <TextBlock FontSize="24" TextAlignment="Center" Style="{StaticResource BubblegumSans}" Margin="0 5 0 0" VerticalAlignment="Center" HorizontalAlignment="Center">Choose color:</TextBlock>
-                                <ComboBox SelectionChanged="ChangeColorBox_OnSelectionChanged" x:Name="ChangeColorBox" Grid.Row="1" Width="170" ItemsSource="{Binding Path=AvailableColourMaps}" DisplayMemberPath="Item1" HorizontalAlignment="Center" VerticalAlignment="Top" Height="20" SelectedValuePath="Item2" SelectedValue="{Binding Path=SelectedColourMap}">
-                                </ComboBox>
-                            </Grid>
                         </Grid>
                     </Border>
 
                     <Border CornerRadius ="15" Margin="0 60 20 0" Width="600" Grid.Column="1" HorizontalAlignment="Right" Background="#D3F7FF" BorderThickness="1" BorderBrush="#36213E">
-                        <Grid x:Name="FractalImageWrapper" >
-                            <Image x:Name="FractalImage" />
+                        <Grid x:Name="CenterContentGrid" >
+                            <Image x:Name="RectangleMoveImage" />
                         </Grid>
                     </Border>
                 </Grid>
@@ -109,9 +81,6 @@
                         <ColumnDefinition Width="0.17*"></ColumnDefinition>
                     </Grid.ColumnDefinitions>
                     <Grid Grid.Column="1">
-                        <TextBlock Width="600" FontSize="48" TextAlignment="Center" Style="{StaticResource BubblegumSans}" HorizontalAlignment="Right"  VerticalAlignment="Top">
-                            f(z) = ctg(z)
-                        </TextBlock>
                         <Border CornerRadius ="15" Background="#63768D" Height="122" VerticalAlignment="Bottom" Margin="0 0 0 33">
                             <Grid Name="ToolBarContentGrid">
                                 <Grid.ColumnDefinitions>
@@ -119,7 +88,7 @@
                                     <ColumnDefinition Width="*"></ColumnDefinition>
                                     <ColumnDefinition Width="*"></ColumnDefinition>
                                 </Grid.ColumnDefinitions>
-                                <Grid Grid.Column="0">
+                                <Grid>
                                     <Grid.ColumnDefinitions>
                                         <ColumnDefinition Width="105"></ColumnDefinition>
                                         <ColumnDefinition></ColumnDefinition>
@@ -145,46 +114,6 @@
                                         </StackPanel>
                                     </Button>
                                 </Grid>
-                                <Grid Grid.Column="2">
-                                    <Grid.ColumnDefinitions>
-                                        <ColumnDefinition></ColumnDefinition>
-                                        <ColumnDefinition Width="105"></ColumnDefinition>
-                                    </Grid.ColumnDefinitions>
-                                    <Button x:Name="ZoomOutButton" Grid.Column="0" BorderThickness="1 1 0 1" BorderBrush="#36213E" Width="85" Height="80" Background="#D3F7FF" HorizontalAlignment="Right"
-                                            Click="ZoomOutButton_OnClick">
-                                        <Button.Resources>
-                                            <Style TargetType="Border">
-                                                <Setter Property="CornerRadius" Value="40 0 0 40"/>
-                                            </Style>
-                                        </Button.Resources>
-                                        <StackPanel Orientation="Horizontal">
-                                            <Image Source="/images/zoom_out.png" Height="60" Width="60"/>
-                                        </StackPanel>
-                                    </Button>
-                                    <Button x:Name="ZoomInButton" Grid.Column="1" BorderThickness="0 1 1 1" BorderBrush="#36213E" Width="85" Height="80" Background="#D3F7FF" HorizontalAlignment="Left"
-                                            Click="ZoomInButton_OnClick">
-                                        <Button.Resources>
-                                            <Style TargetType="Border">
-                                                <Setter Property="CornerRadius" Value=" 0 40 40 0"/>
-                                            </Style>
-                                        </Button.Resources>
-                                        <StackPanel Orientation="Horizontal">
-                                            <Image Source="/images/zoom_in.png" Height="60" Width="60"/>
-                                        </StackPanel>
-                                    </Button>
-                                </Grid>
-                                <Button x:Name="DrawButton" Grid.Column="1" BorderThickness="0 1 1 1" BorderBrush="#36213E" Width="170" Height="80" Background="#D3F7FF" HorizontalAlignment="Center" Click="DrawButton_OnClick">
-                                    <Button.Resources>
-                                        <Style TargetType="Border">
-                                            <Setter Property="CornerRadius" Value="40 "/>
-                                        </Style>
-                                    </Button.Resources>
-                                    <StackPanel Orientation="Horizontal">
-                                        <TextBlock FontSize="48" TextAlignment="Center" Style="{StaticResource BubblegumSans}" HorizontalAlignment="Right"  VerticalAlignment="Top">
-                                            Draw
-                                        </TextBlock>
-                                    </StackPanel>
-                                </Button>
                             </Grid>
                         </Border>
                     </Grid>
