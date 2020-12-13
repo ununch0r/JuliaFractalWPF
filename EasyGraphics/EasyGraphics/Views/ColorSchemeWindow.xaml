@@ -62,38 +62,64 @@
                         <ColumnDefinition Width="0.66*"></ColumnDefinition>
                         <ColumnDefinition Width="0.17*"></ColumnDefinition>
                     </Grid.ColumnDefinitions>
-                    <Border CornerRadius ="15" Margin="20 60  0 0" Width="210"
+                    <Border CornerRadius ="15" Margin="20 0" Width="210" Height="400"
                             Grid.Column="1" HorizontalAlignment="Left" Background="#63768D" BorderThickness="1" BorderBrush="#36213E">
-                        <Grid x:Name="FractalSettings" >
+                        <Grid x:Name="ColorSchemeInfo">
+                            <Grid.RowDefinitions>
+                                <RowDefinition Height="0.2*"></RowDefinition>
+                                <RowDefinition Height="*"></RowDefinition>
+                                <RowDefinition Height="0.4*"></RowDefinition>
+                            </Grid.RowDefinitions>
+                            <TextBlock Grid.Row="0" FontSize="48" TextAlignment="Center" Style="{StaticResource BubblegumSans}" HorizontalAlignment="Center"  VerticalAlignment="Center">
+                                Pixel info
+                            </TextBlock>
+                            <Border Grid.Row="1">
+                                <Grid>
+                                    <Border CornerRadius="15" Background="White" Margin="10">
+                                        <TextBlock x:Name="Info" Margin="10" ></TextBlock>
+                                    </Border>
+                                </Grid>
+                            </Border>
+                            <Border Grid.Row="2">
+                                <Grid>
+                                    <Border x:Name="PixelColorDisplay" CornerRadius="15" Margin="10 0 10 10" Background="Black">
+                                    </Border>
+                                </Grid>
+                            </Border>
+
                         </Grid>
                     </Border>
 
-                    <Border CornerRadius ="15" Margin="0 60 20 0" Width="600" Grid.Column="1" HorizontalAlignment="Right" Background="#D3F7FF" BorderThickness="0" BorderBrush="#36213E">
+                    <Border CornerRadius ="15" Margin="0 20 0 0" Width="600" Grid.Column="1" HorizontalAlignment="Right" Background="#D3F7FF" BorderThickness="0" BorderBrush="#36213E">
                         <Grid x:Name="CenterContentGrid" >
                             <Grid.RowDefinitions>
                                 <RowDefinition></RowDefinition>
+                                <RowDefinition Height="10"></RowDefinition>
                                 <RowDefinition></RowDefinition>
                             </Grid.RowDefinitions>
                             <Grid Grid.Row="0">
                                 <Grid.RowDefinitions>
-                                    <RowDefinition Height="0.2*"></RowDefinition>
+                                    <RowDefinition Height="0.15*"></RowDefinition>
                                     <RowDefinition></RowDefinition>
                                 </Grid.RowDefinitions>
-                                <TextBlock Grid.Row="0" FontSize="48" TextAlignment="Center" Style="{StaticResource BubblegumSans}" HorizontalAlignment="Center"  VerticalAlignment="Top">
+                                <TextBlock Grid.Row="0" FontSize="24" TextAlignment="Center" Style="{StaticResource BubblegumSans}" HorizontalAlignment="Center"  VerticalAlignment="Bottom">
                                     Original
                                 </TextBlock>
-                                <Image x:Name="OriginalPhotoImage" Grid.Row="1" Margin="10" Stretch="Fill">
+                                <Image x:Name="OriginalPhotoImage" Grid.Row="1" Margin="10 5 10 10" Stretch="Fill">
 
                                 </Image>
                             </Grid>
-                            <Grid Grid.Row="1">
+                            <Grid Grid.Row="2">
                                 <Grid.RowDefinitions>
-                                    <RowDefinition Height="0.2*"></RowDefinition>
+                                    <RowDefinition Height="0.15*"></RowDefinition>
                                     <RowDefinition></RowDefinition>
                                 </Grid.RowDefinitions>
-                                <TextBlock Grid.Row="0" FontSize="48" TextAlignment="Center" Style="{StaticResource BubblegumSans}" HorizontalAlignment="Center"  VerticalAlignment="Top">
+                                <TextBlock Grid.Row="0" FontSize="24" TextAlignment="Center" Style="{StaticResource BubblegumSans}" HorizontalAlignment="Center"  VerticalAlignment="Bottom">
                                     After changes
                                 </TextBlock>
+                                <Image x:Name="ChangedPhotoImage" Grid.Row="1" Margin="10 5 10 10" Stretch="Fill" MouseLeftButtonUp="ChangedPhotoImage_OnMouseLeftButtonUp">
+
+                                </Image>
                             </Grid>
                         </Grid>
                     </Border>

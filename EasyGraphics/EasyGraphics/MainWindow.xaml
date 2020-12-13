@@ -63,7 +63,13 @@
                                         <Image Source="images/fractal.png" />
                                 </StackPanel>
                             </Button>
-                            <Button Grid.Column="1" BorderThickness="1" BorderBrush="#36213E" Width="165" Height="135" Background="#D3F7FF">
+                            <Button x:Name="ColorSchemeButton"
+                                    Grid.Column="1" BorderThickness="1" 
+                                    BorderBrush="#36213E" 
+                                    Width="165" 
+                                    Height="135" 
+                                    Background="#D3F7FF"
+                                    Click="ColorSchemeButton_OnClick">
                                 <Button.Resources>
                                     <Style TargetType="Border">
                                         <Setter Property="CornerRadius" Value="15"/>

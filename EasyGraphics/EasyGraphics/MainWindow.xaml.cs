@@ -18,5 +18,11 @@ namespace EasyGraphics
             var fractalsWindow = new FractalWindow();
             fractalsWindow.Show();
         }
+
+        private void ColorSchemeButton_OnClick(object sender, RoutedEventArgs e)
+        {
+            var colorSchemeWindow = new ColorSchemeWindow();
+            colorSchemeWindow.Show();
+        }
     }
 }
