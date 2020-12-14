@@ -181,7 +181,7 @@
                                         <ColumnDefinition Width="105"></ColumnDefinition>
                                         <ColumnDefinition></ColumnDefinition>
                                     </Grid.ColumnDefinitions>
-                                    <Button x:Name="DownloadButton" Grid.Column="0" BorderThickness="1 1 0 1" BorderBrush="#36213E" Width="85" Height="80" Background="#D3F7FF" HorizontalAlignment="Right">
+                                    <Button x:Name="DownloadButton" Grid.Column="0" BorderThickness="1 1 0 1" BorderBrush="#36213E" Width="85" Height="80" Background="#D3F7FF" HorizontalAlignment="Right" Click="DownloadButton_OnClick">
                                         <Button.Resources>
                                             <Style TargetType="Border">
                                                 <Setter Property="CornerRadius" Value="40 0 0 40"/>

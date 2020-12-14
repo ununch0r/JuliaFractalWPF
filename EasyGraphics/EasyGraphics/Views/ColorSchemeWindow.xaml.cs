@@ -3,6 +3,7 @@ using EasyGraphics.EasyGraphicsColors;
 using Microsoft.Win32;
 using System;
 using System.Globalization;
+using System.IO;
 using System.Windows;
 using System.Windows.Input;
 using System.Windows.Media;
@@ -197,6 +198,27 @@ namespace EasyGraphics.Views
 
                 ChangedPhotoImage.Source = newBitmap;
                 ShowPixelInfo(_mouseX, _mouseY);
+            }
+        }
+
+        private void DownloadButton_OnClick(object sender, RoutedEventArgs e)
+        {
+            var saveFileDialog = new SaveFileDialog
+            {
+                Title = "Select a picture",
+                Filter = "All supported graphics|*.jpg;*.jpeg;*.png|" +
+                         "JPEG (*.jpg;*.jpeg)|*.jpg;*.jpeg|" +
+                         "Portable Network Graphic (*.png)|*.png"
+            };
+            if (saveFileDialog.ShowDialog() == true)
+            {
+                var filePath = saveFileDialog.FileName;
+
+                var encoder = new PngBitmapEncoder();
+                encoder.Frames.Add(BitmapFrame.Create((BitmapSource)ChangedPhotoImage.Source));
+                using var stream = new FileStream(filePath, FileMode.Create);
+
+                encoder.Save(stream);
             }
         }
     }
