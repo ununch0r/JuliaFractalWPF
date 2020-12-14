@@ -1,5 +1,8 @@
-﻿using Microsoft.Win32;
+﻿using EasyGraphics.ColorSchemes.Extensions;
+using EasyGraphics.EasyGraphicsColors;
+using Microsoft.Win32;
 using System;
+using System.Globalization;
 using System.Windows;
 using System.Windows.Input;
 using System.Windows.Media;
@@ -16,6 +19,9 @@ namespace EasyGraphics.Views
         {
             InitializeComponent();
         }
+
+        private double _mouseX;
+        private double _mouseY;
 
         private void UploadButton_OnClick(object sender, RoutedEventArgs e)
         {
@@ -37,18 +43,48 @@ namespace EasyGraphics.Views
 
         private void ChangedPhotoImage_OnMouseLeftButtonUp(object sender, MouseButtonEventArgs e)
         {
-            try
-            {
-                var x = Mouse.GetPosition(ChangedPhotoImage).X;
-                var y = Mouse.GetPosition(ChangedPhotoImage).Y;
-                var color = PickColor(x, y);
-                PixelColorDisplay.Background = new SolidColorBrush(color);
-            }
-            catch (Exception ex)
-            {
-                MessageBox.Show(ex.Message);
-            }
+            var x = Mouse.GetPosition(ChangedPhotoImage).X;
+            var y = Mouse.GetPosition(ChangedPhotoImage).Y;
 
+            _mouseX = x;
+            _mouseY = y;
+
+            ShowPixelInfo(x,y);
+        }
+
+        private void ShowPixelInfo(double x, double y)
+        {
+            var color = PickColor(x, y);
+            PixelColorDisplay.Background = new SolidColorBrush(color);
+
+            var drawingColor = System.Drawing.Color.FromArgb(color.A, color.R, color.G, color.B);
+            PrintRGB(color.R, color.G, color.B);
+
+            var cmyk = ColorSchemeConverter.RgbToCmyk(color.R, color.G, color.B);
+            PrintCMYK(cmyk);
+
+            ColorSchemeConverter.ColorToHSV(drawingColor, out var hue, out var saturation, out var value);
+            PrintHSV(hue, saturation, value);
+        }
+
+        private void PrintHSV(double hue, double saturation, double value)
+        {
+            HueTextBlock.Text = Math.Round(hue, 1).ToString(CultureInfo.CurrentCulture) + "°";
+            SaturationTextBlock.Text = ColorSchemeConverter.RoundValue(saturation,1).ToString(CultureInfo.CurrentCulture) + "%";
+            ValuesTextBlock.Text = ColorSchemeConverter.RoundValue(value).ToString(CultureInfo.CurrentCulture) + "%";
+        }
+
+        private void PrintRGB(byte red, byte green, byte blue)
+        {
+            //Info.Text += $"R: {red}\nG: {green}\nB: {blue}\n";
+        }
+
+        private void PrintCMYK(double[] values)
+        {
+            CyanTextBlock.Text = values[0].ToString(CultureInfo.CurrentCulture);
+            MagentaTextBlock.Text = values[1].ToString(CultureInfo.CurrentCulture);
+            YellowTextBlock.Text = values[2].ToString(CultureInfo.CurrentCulture);
+            BlackTextBlock.Text = values[3].ToString(CultureInfo.CurrentCulture);
         }
 
         /// <summary>
@@ -114,6 +150,54 @@ namespace EasyGraphics.Views
             }
 
             return Colors.White;
+        }
+
+
+        private void HsvRadioButton_OnChecked(object sender, RoutedEventArgs e)
+        {
+            CmykGrid.Visibility = Visibility.Collapsed;
+            HsvGrid.Visibility = Visibility.Visible;
+        }
+
+        private void CmykRadioButton_OnChecked(object sender, RoutedEventArgs e)
+        {
+            CmykGrid.Visibility = Visibility.Visible;
+            HsvGrid.Visibility = Visibility.Collapsed;
+        }
+
+        private void BrightnessSlider_OnValueChanged(object sender, RoutedPropertyChangedEventArgs<double> e)
+        {
+            if (ChangedPhotoImage.Source is BitmapSource bitmapSource)
+            {
+                var newBitmap = new WriteableBitmap(bitmapSource);
+
+                var pixelData = newBitmap.CopyPixelsWithStride(out var stride);
+
+                for (var i = 0; i < pixelData.GetLength(0); i++)
+                {
+                    for (var j = 0; j < pixelData.GetLength(1); j++)
+                    {
+                        var color = System.Drawing.Color.FromArgb(pixelData[i, j].Alpha, pixelData[i, j].Red, pixelData[i, j].Green,
+                            pixelData[i, j].Blue);
+                        ColorSchemeConverter.ColorToHSV(color, out var hue, out var saturation, out var value);
+                        //if (hue < 138 && hue > 84 && saturation > 0.10)
+                        if (hue < 121 && hue > 119 && saturation > 0.10)
+                        {
+                            value = e.NewValue;
+                        }
+
+                        var newColor = ColorSchemeConverter.ColorFromHSV(hue, saturation, value);
+                        pixelData[i, j].Red = newColor.R;
+                        pixelData[i, j].Green = newColor.G;
+                        pixelData[i, j].Blue = newColor.B;
+                    }
+                }
+
+                newBitmap.WritePixels(new Int32Rect(0, 0, newBitmap.PixelWidth, newBitmap.PixelHeight), pixelData, stride, 0);
+
+                ChangedPhotoImage.Source = newBitmap;
+                ShowPixelInfo(_mouseX, _mouseY);
+            }
         }
     }
 }
