@@ -15,13 +15,15 @@ namespace EasyGraphics
 
         private void FractalsButton_OnClick(object sender, RoutedEventArgs e)
         {
-            var fractalsWindow = new FractalWindow();
+            var fractalsWindow = new FractalWindow(this);
+            this.Hide();
             fractalsWindow.Show();
         }
 
         private void ColorSchemeButton_OnClick(object sender, RoutedEventArgs e)
         {
-            var colorSchemeWindow = new ColorSchemeWindow();
+            var colorSchemeWindow = new ColorSchemeWindow(this);
+            this.Hide();
             colorSchemeWindow.Show();
         }
     }

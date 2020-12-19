@@ -16,8 +16,10 @@ namespace EasyGraphics.Views
     /// </summary>
     public partial class ColorSchemeWindow : Window
     {
-        public ColorSchemeWindow()
+        private Window _parentWindow;
+        public ColorSchemeWindow(Window parentWindow)
         {
+            _parentWindow = parentWindow;
             InitializeComponent();
         }
 
@@ -39,6 +41,7 @@ namespace EasyGraphics.Views
                 var bitmapImage = new BitmapImage(new Uri(fileDialog.FileName));
                 OriginalPhotoImage.Source = bitmapImage;
                 ChangedPhotoImage.Source = bitmapImage;
+               // BrightnessSlider.Value = BrightnessSlider.Maximum / 2;
             }
         }
 
@@ -59,13 +62,20 @@ namespace EasyGraphics.Views
             PixelColorDisplay.Background = new SolidColorBrush(color);
 
             var drawingColor = System.Drawing.Color.FromArgb(color.A, color.R, color.G, color.B);
-            PrintRGB(color.R, color.G, color.B);
 
             var cmyk = ColorSchemeConverter.RgbToCmyk(color.R, color.G, color.B);
             PrintCMYK(cmyk);
 
             ColorSchemeConverter.ColorToHSV(drawingColor, out var hue, out var saturation, out var value);
             PrintHSV(hue, saturation, value);
+          //  if (isInit == false)
+          //  {
+          //      isInit = true;
+            var hueRounded = Math.Round(hue, 1);
+            if (hueRounded > 110 && hueRounded < 130)
+            {
+                BrightnessSlider.Value = value;
+            }
         }
 
         private void PrintHSV(double hue, double saturation, double value)
@@ -181,10 +191,31 @@ namespace EasyGraphics.Views
                         var color = System.Drawing.Color.FromArgb(pixelData[i, j].Alpha, pixelData[i, j].Red, pixelData[i, j].Green,
                             pixelData[i, j].Blue);
                         ColorSchemeConverter.ColorToHSV(color, out var hue, out var saturation, out var value);
-                        //if (hue < 138 && hue > 84 && saturation > 0.10)
-                        if (hue < 121 && hue > 119 && saturation > 0.10)
+                        if (hue > 110 && hue < 130 && saturation > 0.10)
                         {
-                            value = e.NewValue;
+                            //var difference = (e.NewValue - e.OldValue)*2;
+
+                            //var newValue = value + difference;
+
+                            //if (newValue >= 1)
+                            //{
+                            //    newValue = 1;
+                            //}
+
+                            //if (newValue < 0.01)
+                            //{
+                            //    newValue = 0.01;
+                            //}
+
+                            //value = newValue;
+                            if (e.NewValue < 0.01)
+                            {
+                                value = 0.01;
+                            }
+                            else
+                            {
+                                value = e.NewValue;
+                            }
                         }
 
                         var newColor = ColorSchemeConverter.ColorFromHSV(hue, saturation, value);
@@ -220,6 +251,12 @@ namespace EasyGraphics.Views
 
                 encoder.Save(stream);
             }
+        }
+
+        private void HomeButton_OnClick(object sender, RoutedEventArgs e)
+        {
+            Close();
+            _parentWindow.Show();
         }
     }
 }

@@ -8,15 +8,21 @@
 
   <ItemGroup>
     <None Remove="fonts\BubblegumSans-Regular.ttf" />
+    <None Remove="images\back.png" />
     <None Remove="images\book.png" />
     <None Remove="images\color-palette.png" />
+    <None Remove="images\colorTip.jpg" />
     <None Remove="images\coordinates.png" />
     <None Remove="images\download.png" />
     <None Remove="images\fractal.png" />
+    <None Remove="images\fractalTip.jpg" />
     <None Remove="images\home.png" />
+    <None Remove="images\left.png" />
     <None Remove="images\logo.png" />
     <None Remove="images\question.png" />
     <None Remove="images\quiz.png" />
+    <None Remove="images\rectangleTip.jpg" />
+    <None Remove="images\right.png" />
     <None Remove="images\upload.png" />
     <None Remove="images\zoom_in.png" />
     <None Remove="images\zoom_out.png" />
@@ -30,18 +36,48 @@
     <Resource Include="fonts\BubblegumSans-Regular.ttf">
       <CopyToOutputDirectory>Never</CopyToOutputDirectory>
     </Resource>
+    <Resource Include="images\back.png">
+      <CopyToOutputDirectory>Never</CopyToOutputDirectory>
+    </Resource>
     <Resource Include="images\book.png" />
     <Resource Include="images\color-palette.png" />
+    <Resource Include="images\colorTip.jpg">
+      <CopyToOutputDirectory>Never</CopyToOutputDirectory>
+    </Resource>
     <Resource Include="images\coordinates.png" />
     <Resource Include="images\download.png" />
     <Resource Include="images\fractal.png" />
+    <Resource Include="images\fractalTip.jpg">
+      <CopyToOutputDirectory>Never</CopyToOutputDirectory>
+    </Resource>
     <Resource Include="images\home.png" />
+    <Resource Include="images\left.png">
+      <CopyToOutputDirectory>Never</CopyToOutputDirectory>
+    </Resource>
     <Resource Include="images\logo.png" />
     <Resource Include="images\question.png" />
     <Resource Include="images\quiz.png" />
+    <Resource Include="images\rectangleTip.jpg">
+      <CopyToOutputDirectory>Never</CopyToOutputDirectory>
+    </Resource>
+    <Resource Include="images\right.png">
+      <CopyToOutputDirectory>Never</CopyToOutputDirectory>
+    </Resource>
     <Resource Include="images\upload.png" />
     <Resource Include="images\zoom_in.png" />
     <Resource Include="images\zoom_out.png" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Compile Update="Views\TipsWindow.xaml.cs">
+      <SubType>Code</SubType>
+    </Compile>
+  </ItemGroup>
+
+  <ItemGroup>
+    <Page Update="Views\TipsWindow.xaml">
+      <SubType>Designer</SubType>
+    </Page>
   </ItemGroup>
 
 </Project>

@@ -41,7 +41,7 @@ namespace EasyGraphics.Views
         private Point _topRight;
         private bool _initDone;
         private int[] _selectedColorMap;
-
+        private Window _parentWindow;
         public static List<Tuple<string, int[]>> AvailableColorMaps => new List<Tuple<string, int[]>>
         {
             Tuple.Create("Jet", JetColourMap),
@@ -53,8 +53,9 @@ namespace EasyGraphics.Views
             Tuple.Create("GistHeat", GistHeatColourMap)
         };
 
-        public FractalWindow()
+        public FractalWindow(Window parentWindow)
         {
+            _parentWindow = parentWindow;
             InitializeComponent();
             ContentRendered += (_, __) =>
             {
@@ -361,6 +362,23 @@ namespace EasyGraphics.Views
 
                 encoder.Save(stream);
             }
+        }
+
+        private void ButtonBase_OnClick(object sender, RoutedEventArgs e)
+        {
+            var pages = new List<string>
+            {
+                "asasdasdad"
+            };
+            var pictureName = "fractalTip";
+
+            var tipsWindow = new TipsWindow(pages, pictureName, this);
+            tipsWindow.Show();
+        }
+
+        private void HomeButton_OnClick(object sender, RoutedEventArgs e)
+        {
+            this.Close();
         }
     }
 }
