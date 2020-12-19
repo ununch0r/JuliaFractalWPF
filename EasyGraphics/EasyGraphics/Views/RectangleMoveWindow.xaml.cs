@@ -1,4 +1,7 @@
-﻿using System.Windows;
+﻿using System.Collections.Generic;
+using System.ComponentModel;
+using System.Windows;
+using EasyGraphics.Constants;
 
 namespace EasyGraphics.Views
 {
@@ -7,9 +10,26 @@ namespace EasyGraphics.Views
     /// </summary>
     public partial class RectangleMoveWindow : Window
     {
-        public RectangleMoveWindow()
+        private readonly Window _parentWindow;
+
+        public RectangleMoveWindow(Window parentWindow)
         {
+            _parentWindow = parentWindow;
             InitializeComponent();
+        }
+
+        private void HomeButton_OnClick(object sender, RoutedEventArgs e)
+        {
+            Close();
+            _parentWindow.Show();
+        }
+
+        private void TipsButton_OnClick(object sender, RoutedEventArgs e)
+        {
+            var tipsWindow = new TipsWindow(StringConstants.RectangleMovePages, StringConstants.RectangleMovePictureName, this, _parentWindow);
+
+            Hide();
+            tipsWindow.Show();
         }
     }
 }

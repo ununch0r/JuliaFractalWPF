@@ -45,7 +45,7 @@
                                         <Image Source="/images/back.png" Width="76" />
                                     </StackPanel>
                                 </Button>
-                                <Button x:Name="HomeButton" BorderThickness="0" Style="{StaticResource {x:Static ToolBar.ButtonStyleKey}}" Grid.Column="1" Background="#D3F7FF" Height="100" Width="80">
+                                <Button Click="HomeButton_OnClick" x:Name="HomeButton" BorderThickness="0" Style="{StaticResource {x:Static ToolBar.ButtonStyleKey}}" Grid.Column="1" Background="#D3F7FF" Height="100" Width="80">
                                     <StackPanel Orientation="Horizontal">
                                         <Image Source="/images/home.png" Width="76" Height="100" />
                                     </StackPanel>
@@ -97,7 +97,7 @@
                                     BorderThickness="1"
                                     BorderBrush="#36213E">
                                 <Grid x:Name="ImageGrid" >
-                                    <Image x:Name="TipImage"  Source="{Binding Path=PictureName, Converter={StaticResource My:PictureNameToImageConverter}}"/>
+                                    <Image x:Name="TipImage" Stretch="Fill"  Source="{Binding Path=PictureName, Converter={StaticResource My:PictureNameToImageConverter}}"/>
                                 </Grid>
                             </Border>
                         </Grid>
@@ -129,7 +129,8 @@
                                             Width="145"
                                             Height="80" 
                                             Background="#D3F7FF"
-                                            HorizontalAlignment="Right">
+                                            HorizontalAlignment="Right"
+                                            Click="LeftButton_OnClick">
                                         <Button.Resources>
                                             <Style TargetType="Border">
                                                 <Setter Property="CornerRadius" Value="40 0 0 40"/>
@@ -146,7 +147,8 @@
                                             Width="145" 
                                             Height="80" 
                                             Background="#D3F7FF" 
-                                            HorizontalAlignment="Left">
+                                            HorizontalAlignment="Left"
+                                            Click="RightButton_OnClick">
                                         <Button.Resources>
                                             <Style TargetType="Border">
                                                 <Setter Property="CornerRadius" Value=" 0 40 40 0"/>

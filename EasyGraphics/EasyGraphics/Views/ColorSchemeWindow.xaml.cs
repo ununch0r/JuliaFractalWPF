@@ -2,12 +2,15 @@
 using EasyGraphics.EasyGraphicsColors;
 using Microsoft.Win32;
 using System;
+using System.Collections.Generic;
+using System.ComponentModel;
 using System.Globalization;
 using System.IO;
 using System.Windows;
 using System.Windows.Input;
 using System.Windows.Media;
 using System.Windows.Media.Imaging;
+using EasyGraphics.Constants;
 
 namespace EasyGraphics.Views
 {
@@ -257,6 +260,14 @@ namespace EasyGraphics.Views
         {
             Close();
             _parentWindow.Show();
+        }
+
+        private void TipsButton_OnClick(object sender, RoutedEventArgs e)
+        {
+            var tipsWindow = new TipsWindow(StringConstants.ColorSchemePages, StringConstants.ColorSchemePictureName, this, _parentWindow);
+
+            Hide();
+            tipsWindow.Show();
         }
     }
 }

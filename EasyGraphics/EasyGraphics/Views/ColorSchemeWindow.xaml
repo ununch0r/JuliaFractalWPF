@@ -34,7 +34,7 @@
                                         <Image Source="/images/home.png" Width="76" />
                                     </StackPanel>
                                 </Button>
-                                <Button BorderThickness="0" Style="{StaticResource {x:Static ToolBar.ButtonStyleKey}}" Grid.Column="1" Background="#D3F7FF" Height="100" Width="80">
+                                <Button x:Name="TipsButton" Click="TipsButton_OnClick" BorderThickness="0" Style="{StaticResource {x:Static ToolBar.ButtonStyleKey}}" Grid.Column="1" Background="#D3F7FF" Height="100" Width="80">
                                     <StackPanel Orientation="Horizontal">
                                         <Image Source="/images/book.png" Width="76" Height="100" />
                                     </StackPanel>

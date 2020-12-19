@@ -29,12 +29,12 @@
                                     <ColumnDefinition></ColumnDefinition>
                                     <ColumnDefinition></ColumnDefinition>
                                 </Grid.ColumnDefinitions>
-                                <Button x:Name="HomeButton" BorderThickness="0" Style="{StaticResource {x:Static ToolBar.ButtonStyleKey}}" Grid.Column="0" Background="#D3F7FF" Height="76" Width="76">
+                                <Button x:Name="HomeButton" Click="HomeButton_OnClick" BorderThickness="0" Style="{StaticResource {x:Static ToolBar.ButtonStyleKey}}" Grid.Column="0" Background="#D3F7FF" Height="76" Width="76">
                                     <StackPanel Orientation="Horizontal">
                                         <Image Source="/images/home.png" Width="76" />
                                     </StackPanel>
                                 </Button>
-                                <Button BorderThickness="0" Style="{StaticResource {x:Static ToolBar.ButtonStyleKey}}" Grid.Column="1" Background="#D3F7FF" Height="100" Width="80">
+                                <Button x:Name="TipsButton" Click="TipsButton_OnClick" BorderThickness="0" Style="{StaticResource {x:Static ToolBar.ButtonStyleKey}}" Grid.Column="1" Background="#D3F7FF" Height="100" Width="80">
                                     <StackPanel Orientation="Horizontal">
                                         <Image Source="/images/book.png" Width="76" Height="100" />
                                     </StackPanel>
