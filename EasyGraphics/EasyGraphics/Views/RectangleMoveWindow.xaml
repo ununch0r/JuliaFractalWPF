@@ -19,7 +19,7 @@
                     <Grid Name="NavigationGrid">
                         <Grid.ColumnDefinitions>
                             <ColumnDefinition></ColumnDefinition>
-                            <ColumnDefinition></ColumnDefinition>
+                            <ColumnDefinition Width="2*"></ColumnDefinition>
                             <ColumnDefinition></ColumnDefinition>
                         </Grid.ColumnDefinitions>
                         <Border CornerRadius ="15"  Grid.Row="0" Background="#D3F7FF" Margin="15,8,0,12" Width="330" HorizontalAlignment="Left">
@@ -47,7 +47,7 @@
                             </Grid>
                         </Border>
                         <TextBlock Grid.Column="1" FontSize="96" TextAlignment="Center" Style="{StaticResource BubblegumSans}"  VerticalAlignment="Center">
-                            Rectangle
+                            Rectangle move
                         </TextBlock>
                         <Image Grid.Column="2" Width="120" Height="106" VerticalAlignment="Center" HorizontalAlignment="Right" Margin="0 0 50 0">
                             <Image.Source>
@@ -62,15 +62,103 @@
                         <ColumnDefinition Width="0.66*"></ColumnDefinition>
                         <ColumnDefinition Width="0.17*"></ColumnDefinition>
                     </Grid.ColumnDefinitions>
-                    <Border CornerRadius ="15" Margin="20 60  0 0" Width="210"
+                    <Border CornerRadius ="15" Margin="20 0" Width="210" Height="400"
                             Grid.Column="1" HorizontalAlignment="Left" Background="#63768D" BorderThickness="1" BorderBrush="#36213E">
-                        <Grid x:Name="FractalSettings" >
+                        <Grid x:Name="ColorSchemeInfo">
+                            <Grid.RowDefinitions>
+                                <RowDefinition Height="0.2*"></RowDefinition>
+                                <RowDefinition Height="*"></RowDefinition>
+                                <RowDefinition Height="0.4*"></RowDefinition>
+                            </Grid.RowDefinitions>
+                            <TextBlock Grid.Row="0" FontSize="48" TextAlignment="Center" Style="{StaticResource BubblegumSans}" HorizontalAlignment="Center"  VerticalAlignment="Center">
+                                Pixel info
+                            </TextBlock>
+                            <Border Grid.Row="1">
+                                <Grid>
+                                    <Border CornerRadius="15" Background="#8AC6D0" Margin="15" x:Name="HsvGrid" Visibility="Visible">
+                                        <Grid>
+                                            <Grid.ColumnDefinitions>
+                                                <ColumnDefinition></ColumnDefinition>
+                                                <ColumnDefinition></ColumnDefinition>
+                                            </Grid.ColumnDefinitions>
+                                            <Grid.RowDefinitions>
+                                                <RowDefinition></RowDefinition>
+                                                <RowDefinition></RowDefinition>
+                                                <RowDefinition></RowDefinition>
+                                            </Grid.RowDefinitions>
+                                            <TextBlock Grid.Row="0" Grid.Column="0" TextAlignment="Center" FontSize="24" Style="{StaticResource BubblegumSans}" VerticalAlignment="Center" >H:</TextBlock>
+                                            <TextBlock Grid.Row="1" Grid.Column="0" TextAlignment="Center" FontSize="24" Style="{StaticResource BubblegumSans}" VerticalAlignment="Center" >S:</TextBlock>
+                                            <TextBlock Grid.Row="2" Grid.Column="0" TextAlignment="Center" FontSize="24" Style="{StaticResource BubblegumSans}" VerticalAlignment="Center" >V:</TextBlock>
+                                            <TextBlock x:Name="HueTextBlock" Grid.Row="0" Grid.Column="1" TextAlignment="Center" FontSize="24" Style="{StaticResource BubblegumSans}" VerticalAlignment="Center" ></TextBlock>
+                                            <TextBlock x:Name="SaturationTextBlock" Grid.Row="1" Grid.Column="1" TextAlignment="Center" FontSize="24" Style="{StaticResource BubblegumSans}" VerticalAlignment="Center" ></TextBlock>
+                                            <TextBlock x:Name="ValuesTextBlock" Grid.Row="2" Grid.Column="1" TextAlignment="Center" FontSize="24" Style="{StaticResource BubblegumSans}" VerticalAlignment="Center" ></TextBlock>
+                                        </Grid>
+                                    </Border>
+                                    <Border CornerRadius="15" Background="#8AC6D0" Margin="15" x:Name="CmykGrid" Visibility="Collapsed">
+                                        <Grid>
+                                            <Grid.ColumnDefinitions>
+                                                <ColumnDefinition></ColumnDefinition>
+                                                <ColumnDefinition></ColumnDefinition>
+                                            </Grid.ColumnDefinitions>
+                                            <Grid.RowDefinitions>
+                                                <RowDefinition></RowDefinition>
+                                                <RowDefinition></RowDefinition>
+                                                <RowDefinition></RowDefinition>
+                                                <RowDefinition></RowDefinition>
+                                            </Grid.RowDefinitions>
+                                            <TextBlock Grid.Row="0" Grid.Column="0" TextAlignment="Center" FontSize="24" Style="{StaticResource BubblegumSans}" VerticalAlignment="Center" >C:</TextBlock>
+                                            <TextBlock Grid.Row="1" Grid.Column="0" TextAlignment="Center" FontSize="24" Style="{StaticResource BubblegumSans}" VerticalAlignment="Center" >M:</TextBlock>
+                                            <TextBlock Grid.Row="2" Grid.Column="0" TextAlignment="Center" FontSize="24" Style="{StaticResource BubblegumSans}" VerticalAlignment="Center" >Y:</TextBlock>
+                                            <TextBlock Grid.Row="3" Grid.Column="0" TextAlignment="Center" FontSize="24" Style="{StaticResource BubblegumSans}" VerticalAlignment="Center" >K:</TextBlock>
+                                            <TextBlock x:Name="CyanTextBlock" Grid.Row="0" Grid.Column="1" TextAlignment="Center" FontSize="24" Style="{StaticResource BubblegumSans}" VerticalAlignment="Center" ></TextBlock>
+                                            <TextBlock x:Name="MagentaTextBlock" Grid.Row="1" Grid.Column="1" TextAlignment="Center" FontSize="24" Style="{StaticResource BubblegumSans}" VerticalAlignment="Center" ></TextBlock>
+                                            <TextBlock x:Name="YellowTextBlock" Grid.Row="2" Grid.Column="1" TextAlignment="Center" FontSize="24" Style="{StaticResource BubblegumSans}" VerticalAlignment="Center" ></TextBlock>
+                                            <TextBlock x:Name="BlackTextBlock" Grid.Row="3" Grid.Column="1" TextAlignment="Center" FontSize="24" Style="{StaticResource BubblegumSans}" VerticalAlignment="Center" ></TextBlock>
+                                        </Grid>
+                                    </Border>
+                                </Grid>
+                            </Border>
+                            <Border Grid.Row="2">
+                                <Grid>
+                                    <Border x:Name="PixelColorDisplay" CornerRadius="15" Margin="15 0 15 15" Background="Black">
+                                    </Border>
+                                </Grid>
+                            </Border>
+
                         </Grid>
                     </Border>
 
-                    <Border CornerRadius ="15" Margin="0 60 20 0" Width="600" Grid.Column="1" HorizontalAlignment="Right" Background="#D3F7FF" BorderThickness="1" BorderBrush="#36213E">
+                    <Border CornerRadius ="15" Margin="0 20 0 0" Width="600" Grid.Column="1" HorizontalAlignment="Right" Background="#D3F7FF" BorderThickness="0" BorderBrush="#36213E">
                         <Grid x:Name="CenterContentGrid" >
-                            <Image x:Name="RectangleMoveImage" />
+                            <Grid.RowDefinitions>
+                                <RowDefinition></RowDefinition>
+                                <RowDefinition Height="10"></RowDefinition>
+                                <RowDefinition></RowDefinition>
+                            </Grid.RowDefinitions>
+                            <Grid Grid.Row="0">
+                                <Grid.RowDefinitions>
+                                    <RowDefinition Height="0.15*"></RowDefinition>
+                                    <RowDefinition></RowDefinition>
+                                </Grid.RowDefinitions>
+                                <TextBlock Grid.Row="0" FontSize="24" TextAlignment="Center" Style="{StaticResource BubblegumSans}" HorizontalAlignment="Center"  VerticalAlignment="Bottom">
+                                    Original
+                                </TextBlock>
+                                <Image x:Name="OriginalPhotoImage" Grid.Row="1" Margin="10 5 10 10">
+
+                                </Image>
+                            </Grid>
+                            <Grid Grid.Row="2">
+                                <Grid.RowDefinitions>
+                                    <RowDefinition Height="0.15*"></RowDefinition>
+                                    <RowDefinition></RowDefinition>
+                                </Grid.RowDefinitions>
+                                <TextBlock Grid.Row="0" FontSize="24" TextAlignment="Center" Style="{StaticResource BubblegumSans}" HorizontalAlignment="Center"  VerticalAlignment="Bottom">
+                                    After changes
+                                </TextBlock>
+                                <Image x:Name="ChangedPhotoImage" Grid.Row="1" Margin="10 5 10 10">
+
+                                </Image>
+                            </Grid>
                         </Grid>
                     </Border>
                 </Grid>
@@ -85,7 +173,7 @@
                             <Grid Name="ToolBarContentGrid">
                                 <Grid.ColumnDefinitions>
                                     <ColumnDefinition Width="*"></ColumnDefinition>
-                                    <ColumnDefinition Width="*"></ColumnDefinition>
+                                    <ColumnDefinition Width="2.5*"></ColumnDefinition>
                                     <ColumnDefinition Width="*"></ColumnDefinition>
                                 </Grid.ColumnDefinitions>
                                 <Grid>
@@ -93,7 +181,7 @@
                                         <ColumnDefinition Width="105"></ColumnDefinition>
                                         <ColumnDefinition></ColumnDefinition>
                                     </Grid.ColumnDefinitions>
-                                    <Button x:Name="DownloadButton" Grid.Column="0" BorderThickness="1 1 0 1" BorderBrush="#36213E" Width="85" Height="80" Background="#D3F7FF" HorizontalAlignment="Right">
+                                    <Button x:Name="DownloadButton" Grid.Column="0" BorderThickness="1 1 0 1" BorderBrush="#36213E" Width="85" Height="80" Background="#D3F7FF" HorizontalAlignment="Right" Click="DownloadButton_OnClick">
                                         <Button.Resources>
                                             <Style TargetType="Border">
                                                 <Setter Property="CornerRadius" Value="40 0 0 40"/>
@@ -103,7 +191,8 @@
                                             <Image Source="/images/download.png" Height="60" Width="60"/>
                                         </StackPanel>
                                     </Button>
-                                    <Button x:Name="UploadButton" Grid.Column="1" BorderThickness="0 1 1 1" BorderBrush="#36213E" Width="85" Height="80" Background="#D3F7FF" HorizontalAlignment="Left">
+                                    <Button x:Name="UploadButton" Grid.Column="1" BorderThickness="0 1 1 1" BorderBrush="#36213E" Width="85" Height="80" Background="#D3F7FF" HorizontalAlignment="Left"
+                                            Click="UploadButton_OnClick">
                                         <Button.Resources>
                                             <Style TargetType="Border">
                                                 <Setter Property="CornerRadius" Value=" 0 40 40 0"/>
@@ -113,6 +202,34 @@
                                             <Image Source="/images/upload.png" Height="60" Width="60"/>
                                         </StackPanel>
                                     </Button>
+                                </Grid>
+                                <Grid Grid.Column="2">
+                                    <Grid.RowDefinitions>
+                                        <RowDefinition></RowDefinition>
+                                        <RowDefinition></RowDefinition>
+                                    </Grid.RowDefinitions>
+                                    <Grid.ColumnDefinitions>
+                                        <ColumnDefinition></ColumnDefinition>
+                                        <ColumnDefinition Width="2*"></ColumnDefinition>
+                                    </Grid.ColumnDefinitions>
+                                </Grid>
+                                <Grid Grid.Column="1" >
+                                    <Grid.ColumnDefinitions>
+                                        <ColumnDefinition></ColumnDefinition>
+                                        <ColumnDefinition Width="8*"></ColumnDefinition>
+                                        <ColumnDefinition></ColumnDefinition>
+                                    </Grid.ColumnDefinitions>
+                                    <Grid.RowDefinitions>
+                                        <RowDefinition></RowDefinition>
+                                        <RowDefinition Height="1.4*"></RowDefinition>
+                                    </Grid.RowDefinitions>
+                                    <TextBlock Grid.Row="0" Grid.Column="1" TextAlignment="Center" FontSize="24" Style="{StaticResource BubblegumSans}" VerticalAlignment="Center" >Change the division price</TextBlock>
+                                    <TextBlock Grid.Row="1" Grid.Column="0" TextAlignment="Center" FontSize="24" Style="{StaticResource BubblegumSans}" VerticalAlignment="TOP" >1</TextBlock>
+                                    <TextBlock Grid.Row="1" Grid.Column="2" TextAlignment="Center" FontSize="24" Style="{StaticResource BubblegumSans}" VerticalAlignment="Top" >10</TextBlock>
+                                    <Slider x:Name="DivisionPriceSlider" Grid.Column="1" Grid.Row="1" 
+                                            VerticalAlignment="Top" Margin="0 5 0 0" Minimum="0.010" Maximum="1.0"
+                                            TickFrequency="0.1"
+                                            ValueChanged="DivisionPriceSlider_OnValueChanged"></Slider>
                                 </Grid>
                             </Grid>
                         </Border>

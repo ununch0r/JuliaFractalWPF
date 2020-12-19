@@ -31,5 +31,20 @@ namespace EasyGraphics.Views
             Hide();
             tipsWindow.Show();
         }
+
+        private void DivisionPriceSlider_OnValueChanged(object sender, RoutedPropertyChangedEventArgs<double> e)
+        {
+            
+        }
+
+        private void DownloadButton_OnClick(object sender, RoutedEventArgs e)
+        {
+            
+        }
+
+        private void UploadButton_OnClick(object sender, RoutedEventArgs e)
+        {
+            
+        }
     }
 }
