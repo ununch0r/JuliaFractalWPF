@@ -3,9 +3,44 @@
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:oxy="http://oxyplot.org/wpf"
+        xmlns:validations="clr-namespace:EasyGraphics.Validations"
         mc:Ignorable="d"
         Title="MainWindow" Height="1024" Width="1440" MaxHeight="1024" MaxWidth="1440" 
         Background="Transparent">
+
+    <Window.Resources>
+
+        <ControlTemplate x:Key="ValidationTemplate">
+            <DockPanel>
+                <TextBlock Foreground="Red" FontSize="20">!</TextBlock>
+                <AdornedElementPlaceholder/>
+            </DockPanel>
+        </ControlTemplate>
+
+        <Style TargetType="{x:Type TextBox}">
+            <Style.Resources>
+                <Style TargetType="{x:Type Border}">
+                    <Setter Property="CornerRadius" Value="15" />
+                </Style>
+            </Style.Resources>
+            <Setter Property="Margin" Value="5"></Setter>
+            <Setter Property="Background" Value="#D3F7FF"></Setter>
+            <Setter Property="TextAlignment" Value="Center"></Setter>
+            <Setter Property="VerticalAlignment" Value="Center"></Setter>
+            <Setter Property="FontSize" Value="24"></Setter>
+            <Setter Property="TextElement.FontFamily" Value="/fonts/#Bubblegum Sans"></Setter>
+            <Style.Triggers>
+                <Trigger Property="Validation.HasError" Value="true">
+                    <Setter Property="ToolTip"
+                            Value="{Binding RelativeSource={x:Static RelativeSource.Self},
+                        Path=(Validation.Errors)/ErrorContent}"/>
+                    <Setter Property="Background" Value="Red"></Setter>
+                </Trigger>
+            </Style.Triggers>
+        </Style>
+    </Window.Resources>
+
 
     <Border CornerRadius ="15" Background="#D3F7FF">
         <Grid Name="Base">
@@ -47,7 +82,7 @@
                             </Grid>
                         </Border>
                         <TextBlock Grid.Column="1" FontSize="96" TextAlignment="Center" Style="{StaticResource BubblegumSans}"  VerticalAlignment="Center">
-                            Rectangle move
+                            Quadrangle move
                         </TextBlock>
                         <Image Grid.Column="2" Width="120" Height="106" VerticalAlignment="Center" HorizontalAlignment="Right" Margin="0 0 50 0">
                             <Image.Source>
@@ -62,65 +97,212 @@
                         <ColumnDefinition Width="0.66*"></ColumnDefinition>
                         <ColumnDefinition Width="0.17*"></ColumnDefinition>
                     </Grid.ColumnDefinitions>
-                    <Border CornerRadius ="15" Margin="20 0" Width="210" Height="400"
+                    <Border CornerRadius ="15" Width="210" Height="570" VerticalAlignment="Bottom"
                             Grid.Column="1" HorizontalAlignment="Left" Background="#63768D" BorderThickness="1" BorderBrush="#36213E">
-                        <Grid x:Name="ColorSchemeInfo">
+                        <Grid>
                             <Grid.RowDefinitions>
-                                <RowDefinition Height="0.2*"></RowDefinition>
+                                <RowDefinition Height="0.3*"></RowDefinition>
                                 <RowDefinition Height="*"></RowDefinition>
-                                <RowDefinition Height="0.4*"></RowDefinition>
+                                <RowDefinition Height="0.5*"></RowDefinition>
+                                <RowDefinition Height="0.5*"></RowDefinition>
                             </Grid.RowDefinitions>
                             <TextBlock Grid.Row="0" FontSize="48" TextAlignment="Center" Style="{StaticResource BubblegumSans}" HorizontalAlignment="Center"  VerticalAlignment="Center">
-                                Pixel info
+                                Settings
                             </TextBlock>
                             <Border Grid.Row="1">
                                 <Grid>
-                                    <Border CornerRadius="15" Background="#8AC6D0" Margin="15" x:Name="HsvGrid" Visibility="Visible">
+                                    <Grid.RowDefinitions>
+                                        <RowDefinition Height="0.5*"></RowDefinition>
+                                        <RowDefinition Height="3*"></RowDefinition>
+                                    </Grid.RowDefinitions>
+
+                                    <TextBlock Grid.Row="0" TextWrapping="Wrap" FontSize="24" TextAlignment="Center" Style="{StaticResource BubblegumSans}" HorizontalAlignment="Center"  VerticalAlignment="Bottom">
+                                        Quadrangle creation
+                                    </TextBlock>
+                                    <Border Grid.Row="1" CornerRadius="15" Background="#8AC6D0" Margin="15 0 15 15">
                                         <Grid>
                                             <Grid.ColumnDefinitions>
+                                                <ColumnDefinition Width="0.4*"></ColumnDefinition>
                                                 <ColumnDefinition></ColumnDefinition>
                                                 <ColumnDefinition></ColumnDefinition>
+                                                <ColumnDefinition Width="0.1*"></ColumnDefinition>
                                             </Grid.ColumnDefinitions>
                                             <Grid.RowDefinitions>
-                                                <RowDefinition></RowDefinition>
-                                                <RowDefinition></RowDefinition>
-                                                <RowDefinition></RowDefinition>
-                                            </Grid.RowDefinitions>
-                                            <TextBlock Grid.Row="0" Grid.Column="0" TextAlignment="Center" FontSize="24" Style="{StaticResource BubblegumSans}" VerticalAlignment="Center" >H:</TextBlock>
-                                            <TextBlock Grid.Row="1" Grid.Column="0" TextAlignment="Center" FontSize="24" Style="{StaticResource BubblegumSans}" VerticalAlignment="Center" >S:</TextBlock>
-                                            <TextBlock Grid.Row="2" Grid.Column="0" TextAlignment="Center" FontSize="24" Style="{StaticResource BubblegumSans}" VerticalAlignment="Center" >V:</TextBlock>
-                                            <TextBlock x:Name="HueTextBlock" Grid.Row="0" Grid.Column="1" TextAlignment="Center" FontSize="24" Style="{StaticResource BubblegumSans}" VerticalAlignment="Center" ></TextBlock>
-                                            <TextBlock x:Name="SaturationTextBlock" Grid.Row="1" Grid.Column="1" TextAlignment="Center" FontSize="24" Style="{StaticResource BubblegumSans}" VerticalAlignment="Center" ></TextBlock>
-                                            <TextBlock x:Name="ValuesTextBlock" Grid.Row="2" Grid.Column="1" TextAlignment="Center" FontSize="24" Style="{StaticResource BubblegumSans}" VerticalAlignment="Center" ></TextBlock>
-                                        </Grid>
-                                    </Border>
-                                    <Border CornerRadius="15" Background="#8AC6D0" Margin="15" x:Name="CmykGrid" Visibility="Collapsed">
-                                        <Grid>
-                                            <Grid.ColumnDefinitions>
-                                                <ColumnDefinition></ColumnDefinition>
-                                                <ColumnDefinition></ColumnDefinition>
-                                            </Grid.ColumnDefinitions>
-                                            <Grid.RowDefinitions>
+                                                <RowDefinition Height="0.75*"></RowDefinition>
                                                 <RowDefinition></RowDefinition>
                                                 <RowDefinition></RowDefinition>
                                                 <RowDefinition></RowDefinition>
                                                 <RowDefinition></RowDefinition>
                                             </Grid.RowDefinitions>
-                                            <TextBlock Grid.Row="0" Grid.Column="0" TextAlignment="Center" FontSize="24" Style="{StaticResource BubblegumSans}" VerticalAlignment="Center" >C:</TextBlock>
-                                            <TextBlock Grid.Row="1" Grid.Column="0" TextAlignment="Center" FontSize="24" Style="{StaticResource BubblegumSans}" VerticalAlignment="Center" >M:</TextBlock>
-                                            <TextBlock Grid.Row="2" Grid.Column="0" TextAlignment="Center" FontSize="24" Style="{StaticResource BubblegumSans}" VerticalAlignment="Center" >Y:</TextBlock>
-                                            <TextBlock Grid.Row="3" Grid.Column="0" TextAlignment="Center" FontSize="24" Style="{StaticResource BubblegumSans}" VerticalAlignment="Center" >K:</TextBlock>
-                                            <TextBlock x:Name="CyanTextBlock" Grid.Row="0" Grid.Column="1" TextAlignment="Center" FontSize="24" Style="{StaticResource BubblegumSans}" VerticalAlignment="Center" ></TextBlock>
-                                            <TextBlock x:Name="MagentaTextBlock" Grid.Row="1" Grid.Column="1" TextAlignment="Center" FontSize="24" Style="{StaticResource BubblegumSans}" VerticalAlignment="Center" ></TextBlock>
-                                            <TextBlock x:Name="YellowTextBlock" Grid.Row="2" Grid.Column="1" TextAlignment="Center" FontSize="24" Style="{StaticResource BubblegumSans}" VerticalAlignment="Center" ></TextBlock>
-                                            <TextBlock x:Name="BlackTextBlock" Grid.Row="3" Grid.Column="1" TextAlignment="Center" FontSize="24" Style="{StaticResource BubblegumSans}" VerticalAlignment="Center" ></TextBlock>
+                                            <TextBlock Grid.Row="0" Grid.Column="1" TextAlignment="Center" FontSize="24" Style="{StaticResource BubblegumSans}" VerticalAlignment="Bottom" >X</TextBlock>
+                                            <TextBlock Grid.Row="0" Grid.Column="2" TextAlignment="Center" FontSize="24" Style="{StaticResource BubblegumSans}" VerticalAlignment="Bottom" >Y</TextBlock>
+                                            <TextBlock Grid.Row="1" Grid.Column="0" TextAlignment="Center" FontSize="24" Style="{StaticResource BubblegumSans}" VerticalAlignment="Center" >A</TextBlock>
+                                            <TextBlock Grid.Row="2" Grid.Column="0" TextAlignment="Center" FontSize="24" Style="{StaticResource BubblegumSans}" VerticalAlignment="Center" >B</TextBlock>
+                                            <TextBlock Grid.Row="3" Grid.Column="0" TextAlignment="Center" FontSize="24" Style="{StaticResource BubblegumSans}" VerticalAlignment="Center" >C</TextBlock>
+                                            <TextBlock Grid.Row="4" Grid.Column="0" TextAlignment="Center" FontSize="24" Style="{StaticResource BubblegumSans}" VerticalAlignment="Center" >D</TextBlock>
+
+                                            <TextBox Grid.Row="1" Grid.Column="1" Style="{StaticResource {x:Type TextBox}}"
+                                                     Validation.ErrorTemplate="{StaticResource ValidationTemplate}">
+                                                <TextBox.Text>
+                                                <Binding Path="AVertexXCoordinate" Mode="TwoWay"
+                                                         UpdateSourceTrigger="PropertyChanged" >
+                                                    <Binding.ValidationRules>
+                                                        <validations:DoubleInputValidation/>
+                                                    </Binding.ValidationRules>
+                                                </Binding>
+                                                </TextBox.Text>
+                                            </TextBox>
+                                            <TextBox Grid.Row="2" Grid.Column="1" Style="{StaticResource {x:Type TextBox}}"
+                                                     Validation.ErrorTemplate="{StaticResource ValidationTemplate}">
+                                                <TextBox.Text>
+                                                    <Binding Path="BVertexXCoordinate" Mode="TwoWay"
+                                                             UpdateSourceTrigger="PropertyChanged" >
+                                                        <Binding.ValidationRules>
+                                                            <validations:DoubleInputValidation/>
+                                                        </Binding.ValidationRules>
+                                                    </Binding>
+                                                </TextBox.Text>
+                                            </TextBox>
+                                            <TextBox Grid.Row="3" Grid.Column="1" Style="{StaticResource {x:Type TextBox}}"
+                                                     Validation.ErrorTemplate="{StaticResource ValidationTemplate}">
+                                                <TextBox.Text>
+                                                    <Binding Path="CVertexXCoordinate" Mode="TwoWay"
+                                                             UpdateSourceTrigger="PropertyChanged" >
+                                                        <Binding.ValidationRules>
+                                                            <validations:DoubleInputValidation/>
+                                                        </Binding.ValidationRules>
+                                                    </Binding>
+                                                </TextBox.Text>
+                                            </TextBox>
+                                            <TextBox Grid.Row="4" Grid.Column="1" Style="{StaticResource {x:Type TextBox}}"
+                                                     Validation.ErrorTemplate="{StaticResource ValidationTemplate}">
+                                                <TextBox.Text>
+                                                    <Binding Path="DVertexXCoordinate" Mode="TwoWay"
+                                                             UpdateSourceTrigger="PropertyChanged" >
+                                                        <Binding.ValidationRules>
+                                                            <validations:DoubleInputValidation/>
+                                                        </Binding.ValidationRules>
+                                                    </Binding>
+                                                </TextBox.Text>
+                                            </TextBox>
+                                            <TextBox Grid.Row="1" Grid.Column="2" Style="{StaticResource {x:Type TextBox}}"
+                                                     Validation.ErrorTemplate="{StaticResource ValidationTemplate}">
+                                                <TextBox.Text>
+                                                    <Binding Path="AVertexYCoordinate" Mode="TwoWay"
+                                                             UpdateSourceTrigger="PropertyChanged" >
+                                                        <Binding.ValidationRules>
+                                                            <validations:DoubleInputValidation/>
+                                                        </Binding.ValidationRules>
+                                                    </Binding>
+                                                </TextBox.Text>
+                                            </TextBox>
+                                            <TextBox Grid.Row="2" Grid.Column="2" Style="{StaticResource {x:Type TextBox}}"
+                                                     Validation.ErrorTemplate="{StaticResource ValidationTemplate}">
+                                                <TextBox.Text>
+                                                    <Binding Path="BVertexYCoordinate" Mode="TwoWay"
+                                                             UpdateSourceTrigger="PropertyChanged" >
+                                                        <Binding.ValidationRules>
+                                                            <validations:DoubleInputValidation/>
+                                                        </Binding.ValidationRules>
+                                                    </Binding>
+                                                </TextBox.Text>
+                                            </TextBox>
+                                            <TextBox Grid.Row="3" Grid.Column="2" Style="{StaticResource {x:Type TextBox}}"
+                                                     Validation.ErrorTemplate="{StaticResource ValidationTemplate}">
+                                                <TextBox.Text>
+                                                    <Binding Path="CVertexYCoordinate" Mode="TwoWay"
+                                                             UpdateSourceTrigger="PropertyChanged" >
+                                                        <Binding.ValidationRules>
+                                                            <validations:DoubleInputValidation/>
+                                                        </Binding.ValidationRules>
+                                                    </Binding>
+                                                </TextBox.Text>
+                                            </TextBox>
+                                            <TextBox Grid.Row="4" Grid.Column="2" Style="{StaticResource {x:Type TextBox}}"
+                                                     Validation.ErrorTemplate="{StaticResource ValidationTemplate}">
+                                                <TextBox.Text>
+                                                    <Binding Path="DVertexYCoordinate" Mode="TwoWay"
+                                                             UpdateSourceTrigger="PropertyChanged" >
+                                                        <Binding.ValidationRules>
+                                                            <validations:DoubleInputValidation/>
+                                                        </Binding.ValidationRules>
+                                                    </Binding>
+                                                </TextBox.Text>
+                                            </TextBox>
+
                                         </Grid>
                                     </Border>
                                 </Grid>
                             </Border>
+                            
                             <Border Grid.Row="2">
                                 <Grid>
-                                    <Border x:Name="PixelColorDisplay" CornerRadius="15" Margin="15 0 15 15" Background="Black">
+                                    <Grid.RowDefinitions>
+                                        <RowDefinition Height="0.5*"></RowDefinition>
+                                        <RowDefinition Height="1.25*"></RowDefinition>
+                                    </Grid.RowDefinitions>
+
+                                    <TextBlock Grid.Row="0" TextWrapping="Wrap" FontSize="24" TextAlignment="Center" Style="{StaticResource BubblegumSans}" HorizontalAlignment="Center"  VerticalAlignment="Bottom">
+                                        Offset
+                                    </TextBlock>
+
+                                    <Border CornerRadius="15" Background="#8AC6D0" Margin="15 0 15 15" Visibility="Visible" Grid.Row="1">
+                                        <Grid>
+                                            <Grid.ColumnDefinitions>
+                                                <ColumnDefinition Width="0.4*"></ColumnDefinition>
+                                                <ColumnDefinition></ColumnDefinition>
+                                                <ColumnDefinition></ColumnDefinition>
+                                                <ColumnDefinition Width="0.1*"></ColumnDefinition>
+                                            </Grid.ColumnDefinitions>
+                                            <Grid.RowDefinitions>
+                                                <RowDefinition></RowDefinition>
+                                                <RowDefinition></RowDefinition>
+                                            </Grid.RowDefinitions>
+                                            <TextBlock Grid.Row="0" Grid.Column="1" TextAlignment="Center" FontSize="24" Style="{StaticResource BubblegumSans}" VerticalAlignment="Bottom" >X</TextBlock>
+                                            <TextBlock Grid.Row="0" Grid.Column="2" TextAlignment="Center" FontSize="24" Style="{StaticResource BubblegumSans}" VerticalAlignment="Bottom" >Y</TextBlock>
+                                            <TextBlock Grid.Row="1" Grid.Column="0" TextAlignment="Center" FontSize="24" Style="{StaticResource BubblegumSans}" VerticalAlignment="Center" >Δ</TextBlock>
+
+                                            <TextBox Grid.Row="1" Grid.Column="1" Style="{StaticResource {x:Type TextBox}}"
+                                                     Validation.ErrorTemplate="{StaticResource ValidationTemplate}">
+                                                <TextBox.Text>
+                                                    <Binding Path="DeltaX" Mode="TwoWay"
+                                                             UpdateSourceTrigger="PropertyChanged" >
+                                                        <Binding.ValidationRules>
+                                                            <validations:DoubleInputValidation/>
+                                                        </Binding.ValidationRules>
+                                                    </Binding>
+                                                </TextBox.Text>
+                                            </TextBox>
+                                            <TextBox Grid.Row="1" Grid.Column="2" Style="{StaticResource {x:Type TextBox}}"
+                                                     Validation.ErrorTemplate="{StaticResource ValidationTemplate}">
+                                                <TextBox.Text>
+                                                    <Binding Path="DeltaY" Mode="TwoWay"
+                                                             UpdateSourceTrigger="PropertyChanged" >
+                                                        <Binding.ValidationRules>
+                                                            <validations:DoubleInputValidation/>
+                                                        </Binding.ValidationRules>
+                                                    </Binding>
+                                                </TextBox.Text>
+                                            </TextBox>
+
+                                        </Grid>
+                                    </Border>
+                                        
+                                </Grid>
+                            </Border>
+                            <Border Grid.Row="3">
+                                <Grid>
+                                    <Grid.RowDefinitions>
+                                        <RowDefinition Height="0.5*"></RowDefinition>
+                                        <RowDefinition Height="1.25*"></RowDefinition>
+                                    </Grid.RowDefinitions>
+
+                                    <TextBlock Grid.Row="0" TextWrapping="Wrap" FontSize="24" TextAlignment="Center" Style="{StaticResource BubblegumSans}" HorizontalAlignment="Center"  VerticalAlignment="Bottom">
+                                        Info
+                                    </TextBlock>
+                                    <Border Grid.Row="1" Background="#D3F7FF" Margin="15 0 15 15" CornerRadius="15">
+                                        <TextBlock TextWrapping="Wrap" FontSize="24" TextAlignment="Center" Style="{StaticResource BubblegumSans}"
+                                                   Text="{Binding ErrorText, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" Foreground="Red"></TextBlock>
                                     </Border>
                                 </Grid>
                             </Border>
@@ -128,38 +310,9 @@
                         </Grid>
                     </Border>
 
-                    <Border CornerRadius ="15" Margin="0 20 0 0" Width="600" Grid.Column="1" HorizontalAlignment="Right" Background="#D3F7FF" BorderThickness="0" BorderBrush="#36213E">
-                        <Grid x:Name="CenterContentGrid" >
-                            <Grid.RowDefinitions>
-                                <RowDefinition></RowDefinition>
-                                <RowDefinition Height="10"></RowDefinition>
-                                <RowDefinition></RowDefinition>
-                            </Grid.RowDefinitions>
-                            <Grid Grid.Row="0">
-                                <Grid.RowDefinitions>
-                                    <RowDefinition Height="0.15*"></RowDefinition>
-                                    <RowDefinition></RowDefinition>
-                                </Grid.RowDefinitions>
-                                <TextBlock Grid.Row="0" FontSize="24" TextAlignment="Center" Style="{StaticResource BubblegumSans}" HorizontalAlignment="Center"  VerticalAlignment="Bottom">
-                                    Original
-                                </TextBlock>
-                                <Image x:Name="OriginalPhotoImage" Grid.Row="1" Margin="10 5 10 10">
-
-                                </Image>
-                            </Grid>
-                            <Grid Grid.Row="2">
-                                <Grid.RowDefinitions>
-                                    <RowDefinition Height="0.15*"></RowDefinition>
-                                    <RowDefinition></RowDefinition>
-                                </Grid.RowDefinitions>
-                                <TextBlock Grid.Row="0" FontSize="24" TextAlignment="Center" Style="{StaticResource BubblegumSans}" HorizontalAlignment="Center"  VerticalAlignment="Bottom">
-                                    After changes
-                                </TextBlock>
-                                <Image x:Name="ChangedPhotoImage" Grid.Row="1" Margin="10 5 10 10">
-
-                                </Image>
-                            </Grid>
-                        </Grid>
+                    <Border CornerRadius ="15" Height="570" Width="600" Grid.Column="1" HorizontalAlignment="Right" Background="#D3F7FF" VerticalAlignment="Bottom" BorderThickness="0" BorderBrush="#36213E">
+                        <oxy:PlotView x:Name="MovePlot" 
+                                      Model="{Binding PlotModel}" ></oxy:PlotView>
                     </Border>
                 </Grid>
                 <Grid Grid.Row="2" Name="ToolBarGrid">
@@ -204,32 +357,60 @@
                                     </Button>
                                 </Grid>
                                 <Grid Grid.Column="2">
-                                    <Grid.RowDefinitions>
-                                        <RowDefinition></RowDefinition>
-                                        <RowDefinition></RowDefinition>
-                                    </Grid.RowDefinitions>
-                                    <Grid.ColumnDefinitions>
-                                        <ColumnDefinition></ColumnDefinition>
-                                        <ColumnDefinition Width="2*"></ColumnDefinition>
-                                    </Grid.ColumnDefinitions>
+                                    <Button x:Name="Start" BorderThickness="1" BorderBrush="#36213E" Width="170" Height="80" Background="#D3F7FF" HorizontalAlignment="Center" Click="Start_OnClick">
+                                        <Button.Resources>
+                                            <Style TargetType="Border">
+                                                <Setter Property="CornerRadius" Value="40 "/>
+                                            </Style>
+                                        </Button.Resources>
+                                        <StackPanel Orientation="Horizontal">
+                                            <TextBlock FontSize="48" TextAlignment="Center" Style="{StaticResource BubblegumSans}" HorizontalAlignment="Right"  VerticalAlignment="Top">
+                                                Start
+                                            </TextBlock>
+                                        </StackPanel>
+                                    </Button>
+                                    <Button x:Name="Stop" Visibility="Collapsed" BorderThickness="1" BorderBrush="#36213E" Width="170" Height="80" Background="#D3F7FF" HorizontalAlignment="Center" Click="Stop_OnClick">
+                                        <Button.Resources>
+                                            <Style TargetType="Border">
+                                                <Setter Property="CornerRadius" Value="40 "/>
+                                            </Style>
+                                        </Button.Resources>
+                                        <StackPanel Orientation="Horizontal">
+                                            <TextBlock FontSize="48" TextAlignment="Center" Style="{StaticResource BubblegumSans}" HorizontalAlignment="Right"  VerticalAlignment="Top">
+                                                Stop
+                                            </TextBlock>
+                                        </StackPanel>
+                                    </Button>
                                 </Grid>
                                 <Grid Grid.Column="1" >
                                     <Grid.ColumnDefinitions>
                                         <ColumnDefinition></ColumnDefinition>
-                                        <ColumnDefinition Width="8*"></ColumnDefinition>
                                         <ColumnDefinition></ColumnDefinition>
                                     </Grid.ColumnDefinitions>
-                                    <Grid.RowDefinitions>
-                                        <RowDefinition></RowDefinition>
-                                        <RowDefinition Height="1.4*"></RowDefinition>
-                                    </Grid.RowDefinitions>
-                                    <TextBlock Grid.Row="0" Grid.Column="1" TextAlignment="Center" FontSize="24" Style="{StaticResource BubblegumSans}" VerticalAlignment="Center" >Change the division price</TextBlock>
-                                    <TextBlock Grid.Row="1" Grid.Column="0" TextAlignment="Center" FontSize="24" Style="{StaticResource BubblegumSans}" VerticalAlignment="TOP" >1</TextBlock>
-                                    <TextBlock Grid.Row="1" Grid.Column="2" TextAlignment="Center" FontSize="24" Style="{StaticResource BubblegumSans}" VerticalAlignment="Top" >10</TextBlock>
-                                    <Slider x:Name="DivisionPriceSlider" Grid.Column="1" Grid.Row="1" 
-                                            VerticalAlignment="Top" Margin="0 5 0 0" Minimum="0.010" Maximum="1.0"
-                                            TickFrequency="0.1"
-                                            ValueChanged="DivisionPriceSlider_OnValueChanged"></Slider>
+                                    <Button x:Name="Move" Grid.Column="1" BorderThickness="1" Margin=" 5 0 0 0 " BorderBrush="#36213E" Width="170" Height="80" Background="#D3F7FF" HorizontalAlignment="Left" Click="Move_OnClick">
+                                        <Button.Resources>
+                                            <Style TargetType="Border">
+                                                <Setter Property="CornerRadius" Value="40 "/>
+                                            </Style>
+                                        </Button.Resources>
+                                        <StackPanel Orientation="Horizontal">
+                                            <TextBlock FontSize="48" TextAlignment="Center" Style="{StaticResource BubblegumSans}" HorizontalAlignment="Right"  VerticalAlignment="Top">
+                                                Move
+                                            </TextBlock>
+                                        </StackPanel>
+                                    </Button>
+                                    <Button x:Name="Back" Grid.Column="0" BorderThickness="1" Margin=" 0 0 5 0 " BorderBrush="#36213E" Width="170" Height="80" Background="#D3F7FF" HorizontalAlignment="Right" Click="Back_OnClick">
+                                        <Button.Resources>
+                                            <Style TargetType="Border">
+                                                <Setter Property="CornerRadius" Value="40 "/>
+                                            </Style>
+                                        </Button.Resources>
+                                        <StackPanel Orientation="Horizontal">
+                                            <TextBlock FontSize="48" TextAlignment="Center" Style="{StaticResource BubblegumSans}" HorizontalAlignment="Right"  VerticalAlignment="Top">
+                                                Back
+                                            </TextBlock>
+                                        </StackPanel>
+                                    </Button>
                                 </Grid>
                             </Grid>
                         </Border>
