@@ -301,7 +301,7 @@
                                         Info
                                     </TextBlock>
                                     <Border Grid.Row="1" Background="#D3F7FF" Margin="15 0 15 15" CornerRadius="15">
-                                        <TextBlock TextWrapping="Wrap" FontSize="24" TextAlignment="Center" Style="{StaticResource BubblegumSans}"
+                                        <TextBlock TextWrapping="Wrap" FontSize="18" VerticalAlignment="Center" TextAlignment="Center" Style="{StaticResource BubblegumSans}"
                                                    Text="{Binding ErrorText, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" Foreground="Red"></TextBlock>
                                     </Border>
                                 </Grid>

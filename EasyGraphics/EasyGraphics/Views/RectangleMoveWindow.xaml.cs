@@ -45,14 +45,14 @@ namespace EasyGraphics.Views
 
         private void InitializeCoordinates()
         {
-            AVertexXCoordinate = 0;
-            AVertexYCoordinate = 0;
-            BVertexXCoordinate = 0;
-            BVertexYCoordinate = 2;
-            CVertexXCoordinate = 4;
-            CVertexYCoordinate = 2;
-            DVertexXCoordinate = 4;
-            DVertexYCoordinate = 0;
+            AVertexXCoordinate = 1;
+            AVertexYCoordinate = 1;
+            BVertexXCoordinate = 1;
+            BVertexYCoordinate = 3;
+            CVertexXCoordinate = 5;
+            CVertexYCoordinate = 3;
+            DVertexXCoordinate = 5;
+            DVertexYCoordinate = 1;
         }
 
         private PlotModel _plotModel = new PlotModel();
@@ -255,9 +255,46 @@ namespace EasyGraphics.Views
             }
         }
 
-        private bool ValidatePoints()
+        private void ValidatePoints()
         {
-            return true;
+            var pointA = new Point(AVertexXCoordinate, AVertexYCoordinate);
+            var pointB = new Point(BVertexXCoordinate, BVertexYCoordinate);
+            var pointC = new Point(CVertexXCoordinate, CVertexYCoordinate);
+            var pointD = new Point(DVertexXCoordinate, DVertexYCoordinate);
+
+            var isABCrossingCD = AreCrossing(pointA, pointB, pointC, pointD);
+            var isBCCrossingAD = AreCrossing(pointB, pointC, pointA, pointD);
+
+            if (isABCrossingCD || isBCCrossingAD)
+            {
+                ErrorText = "Segments intersect, please specify correct points!";
+                Start.IsEnabled = false;
+                Move.IsEnabled = false;
+                Back.IsEnabled = false;
+            }
+            else
+            {
+                ErrorText = "";
+                Start.IsEnabled = true;
+                Move.IsEnabled = true;
+                Back.IsEnabled = true;
+            }
+        }
+
+        public bool AreCrossing(Point p1, Point p2, Point p3, Point p4)
+        {
+            var v1 = VectorMultiplication(p4.X - p3.X, p4.Y - p3.Y, p1.X - p3.X, p1.Y - p3.Y);
+            var v2 = VectorMultiplication(p4.X - p3.X, p4.Y - p3.Y, p2.X - p3.X, p2.Y - p3.Y);
+            var v3 = VectorMultiplication(p2.X - p1.X, p2.Y - p1.Y, p3.X - p1.X, p3.Y - p1.Y);
+            var v4 = VectorMultiplication(p2.X - p1.X, p2.Y - p1.Y, p4.X - p1.X, p4.Y - p1.Y);
+            if ((v1 * v2) < 0 && (v3 * v4) < 0)
+                return true;
+            return false;
+        }
+
+        private double VectorMultiplication(double ax, double ay, double bx, double by)
+        {
+            return ax * by - bx * ay;
         }
 
         private string _errorText;
