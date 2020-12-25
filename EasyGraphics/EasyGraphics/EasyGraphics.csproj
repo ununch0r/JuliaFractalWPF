@@ -8,6 +8,7 @@
 
   <ItemGroup>
     <None Remove="fonts\BubblegumSans-Regular.ttf" />
+    <None Remove="images\AffinesHelp.jpg" />
     <None Remove="images\back.png" />
     <None Remove="images\book.png" />
     <None Remove="images\color-palette.png" />
@@ -16,6 +17,7 @@
     <None Remove="images\coordinates.png" />
     <None Remove="images\download.png" />
     <None Remove="images\fractal.png" />
+    <None Remove="images\FractalsHelp.jpg" />
     <None Remove="images\fractalTip.jpg" />
     <None Remove="images\home.png" />
     <None Remove="images\left.png" />
@@ -39,6 +41,9 @@
     <Resource Include="fonts\BubblegumSans-Regular.ttf">
       <CopyToOutputDirectory>Never</CopyToOutputDirectory>
     </Resource>
+    <Resource Include="images\AffinesHelp.jpg">
+      <CopyToOutputDirectory>Never</CopyToOutputDirectory>
+    </Resource>
     <Resource Include="images\back.png">
       <CopyToOutputDirectory>Never</CopyToOutputDirectory>
     </Resource>
@@ -53,6 +58,9 @@
     <Resource Include="images\coordinates.png" />
     <Resource Include="images\download.png" />
     <Resource Include="images\fractal.png" />
+    <Resource Include="images\FractalsHelp.jpg">
+      <CopyToOutputDirectory>Never</CopyToOutputDirectory>
+    </Resource>
     <Resource Include="images\fractalTip.jpg">
       <CopyToOutputDirectory>Never</CopyToOutputDirectory>
     </Resource>

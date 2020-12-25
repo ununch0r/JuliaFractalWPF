@@ -378,5 +378,13 @@ namespace EasyGraphics.Views
             _parentWindow.Show();
             this.Close();
         }
+
+        private void HelpButton_OnClick(object sender, RoutedEventArgs e)
+        {
+            var helpWindow = new HelpWindow(StringConstants.FractalsHelp, this, _parentWindow);
+
+            Hide();
+            helpWindow.Show();
+        }
     }
 }

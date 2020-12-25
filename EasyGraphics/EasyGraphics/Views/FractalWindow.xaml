@@ -47,12 +47,13 @@
                                         Background="#D3F7FF" 
                                         Height="100" 
                                         Width="80"
-                                        Click="ButtonBase_OnClick">
+                                        Click="ButtonBase_OnClick"
+                                        >
                                     <StackPanel Orientation="Horizontal">
                                         <Image Source="/images/book.png" Width="76" Height="100" />
                                     </StackPanel>
                                 </Button>
-                                <Button Grid.Column="2" BorderThickness="0" Style="{StaticResource {x:Static ToolBar.ButtonStyleKey}}" Background="#D3F7FF" Height="80" Width="80">
+                                <Button x:Name="HelpButton" Click="HelpButton_OnClick" Grid.Column="2" BorderThickness="0" Style="{StaticResource {x:Static ToolBar.ButtonStyleKey}}" Background="#D3F7FF" Height="80" Width="80">
                                     <StackPanel Orientation="Horizontal">
                                         <Image Source="/images/question.png" Height="76" />
                                     </StackPanel>

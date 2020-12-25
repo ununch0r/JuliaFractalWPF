@@ -8,6 +8,8 @@ namespace EasyGraphics.Constants
         public static readonly string ColorSchemePictureName = "colorTip";
         public static readonly string RectangleMovePictureName = "rectangleTip";
         public static readonly string ColorSchemeHelp = "ColorsHelp";
+        public static readonly string FractalsHelp = "FractalsHelp";
+        public static readonly string AffinesHelp = "AffinesHelp";
 
 
         public static readonly List<string> RectangleMovePages = new List<string>

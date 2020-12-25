@@ -549,5 +549,13 @@ namespace EasyGraphics.Views
             Stop.Visibility = Visibility.Collapsed;
             Start.Visibility = Visibility.Visible;
         }
+
+        private void HelpButton_OnClick(object sender, RoutedEventArgs e)
+        {
+            var helpWindow = new HelpWindow(StringConstants.AffinesHelp, this, _parentWindow);
+
+            Hide();
+            helpWindow.Show();
+        }
     }
 }
