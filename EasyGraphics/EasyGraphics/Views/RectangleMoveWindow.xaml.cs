@@ -39,6 +39,9 @@ namespace EasyGraphics.Views
 
             SetUpModel();
             InitializeCoordinates();
+
+            _timer.Tick += TimerOnElapsed;
+            _timer.Interval = new TimeSpan(0, 0, 1);
         }
 
         private void InitializeCoordinates()

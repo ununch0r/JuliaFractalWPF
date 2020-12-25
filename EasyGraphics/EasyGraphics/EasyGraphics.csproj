@@ -11,6 +11,7 @@
     <None Remove="images\back.png" />
     <None Remove="images\book.png" />
     <None Remove="images\color-palette.png" />
+    <None Remove="images\ColorsHelp.jpg" />
     <None Remove="images\colorTip.jpg" />
     <None Remove="images\coordinates.png" />
     <None Remove="images\download.png" />
@@ -43,6 +44,9 @@
     </Resource>
     <Resource Include="images\book.png" />
     <Resource Include="images\color-palette.png" />
+    <Resource Include="images\ColorsHelp.jpg">
+      <CopyToOutputDirectory>Never</CopyToOutputDirectory>
+    </Resource>
     <Resource Include="images\colorTip.jpg">
       <CopyToOutputDirectory>Never</CopyToOutputDirectory>
     </Resource>

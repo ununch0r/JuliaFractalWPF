@@ -269,5 +269,13 @@ namespace EasyGraphics.Views
             Hide();
             tipsWindow.Show();
         }
+
+        private void HelpButton_OnClick(object sender, RoutedEventArgs e)
+        {
+            var tipsWindow = new HelpWindow(StringConstants.ColorSchemeHelp, this, _parentWindow);
+
+            Hide();
+            tipsWindow.Show();
+        }
     }
 }
