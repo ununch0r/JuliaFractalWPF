@@ -1,16 +1,14 @@
 ﻿using EasyGraphics.Annotations;
 using EasyGraphics.Constants;
+using MathNet.Numerics.LinearAlgebra;
 using MathNet.Numerics.LinearAlgebra.Double;
 using OxyPlot;
 using OxyPlot.Axes;
 using System;
 using System.ComponentModel;
 using System.Runtime.CompilerServices;
-using System.Threading;
-using System.Timers;
 using System.Windows;
 using System.Windows.Threading;
-using MathNet.Numerics.LinearAlgebra;
 
 namespace EasyGraphics.Views
 {
@@ -66,11 +64,6 @@ namespace EasyGraphics.Views
                 _plotModel = value;
                 OnPropertyChanged(nameof(PlotModel));
             }
-        }
-
-        private void ValidateIsDouble(string text)
-        {
-
         }
 
         private void SetUpModel()
@@ -262,22 +255,33 @@ namespace EasyGraphics.Views
             var pointC = new Point(CVertexXCoordinate, CVertexYCoordinate);
             var pointD = new Point(DVertexXCoordinate, DVertexYCoordinate);
 
-            var isABCrossingCD = AreCrossing(pointA, pointB, pointC, pointD);
-            var isBCCrossingAD = AreCrossing(pointB, pointC, pointA, pointD);
-
-            if (isABCrossingCD || isBCCrossingAD)
+            if (pointA == pointB || pointA == pointC || pointA == pointD ||
+                pointB == pointC || pointB == pointD || pointC == pointD)
             {
-                ErrorText = "Segments intersect, please specify correct points!";
+                ErrorText = "Wrong points. Figure isn't a quadrangle.";
                 Start.IsEnabled = false;
                 Move.IsEnabled = false;
                 Back.IsEnabled = false;
             }
             else
             {
-                ErrorText = "";
-                Start.IsEnabled = true;
-                Move.IsEnabled = true;
-                Back.IsEnabled = true;
+                var isABCrossingCD = AreCrossing(pointA, pointB, pointC, pointD);
+                var isBCCrossingAD = AreCrossing(pointB, pointC, pointA, pointD);
+
+                if (isABCrossingCD || isBCCrossingAD)
+                {
+                    ErrorText = "Segments intersects, please specify correct points!";
+                    Start.IsEnabled = false;
+                    Move.IsEnabled = false;
+                    Back.IsEnabled = false;
+                }
+                else
+                {
+                    ErrorText = "";
+                    Start.IsEnabled = true;
+                    Move.IsEnabled = true;
+                    Back.IsEnabled = true;
+                }
             }
         }
 
