@@ -5,9 +5,7 @@
              StartupUri="MainWindow.xaml">
     <Application.Resources>
         <Style x:Key="BubblegumSans">
-            <Setter Property="TextElement.FontFamily" Value="/fonts/#Bubblegum Sans">
-
-            </Setter>
+            <Setter Property="TextElement.FontFamily" Value="/fonts/#Bubblegum Sans"></Setter>
         </Style>
     </Application.Resources>
 </Application>

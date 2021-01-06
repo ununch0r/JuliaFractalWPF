@@ -79,7 +79,7 @@
                                     <Image Source="images/color-palette.png" />
                                 </StackPanel>
                             </Button>
-                            <Button Grid.Column="2" BorderThickness="1" BorderBrush="#36213E" Width="165" Height="135" Background="#D3F7FF">
+                            <Button x:Name="RectangleMoveButton" Click="RectangleMoveButton_OnClick" Grid.Column="2" BorderThickness="1" BorderBrush="#36213E" Width="165" Height="135" Background="#D3F7FF">
                                 <Button.Resources>
                                     <Style TargetType="Border">
                                         <Setter Property="CornerRadius" Value="15"/>

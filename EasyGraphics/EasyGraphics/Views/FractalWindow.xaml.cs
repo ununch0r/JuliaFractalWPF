@@ -12,6 +12,7 @@ using System.Windows.Input;
 using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using EasyGraphics.Annotations;
+using EasyGraphics.Constants;
 using EasyGraphics.EasyGraphicsColors;
 using EasyGraphics.Fractals.FractalStrategies;
 using EasyGraphics.Fractals.Interfaces;
@@ -41,7 +42,7 @@ namespace EasyGraphics.Views
         private Point _topRight;
         private bool _initDone;
         private int[] _selectedColorMap;
-        private Window _parentWindow;
+        private readonly Window _parentWindow;
         public static List<Tuple<string, int[]>> AvailableColorMaps => new List<Tuple<string, int[]>>
         {
             Tuple.Create("Jet", JetColourMap),
@@ -366,19 +367,24 @@ namespace EasyGraphics.Views
 
         private void ButtonBase_OnClick(object sender, RoutedEventArgs e)
         {
-            var pages = new List<string>
-            {
-                "asasdasdad"
-            };
-            var pictureName = "fractalTip";
+            var tipsWindow = new TipsWindow(StringConstants.FractalPages, StringConstants.FractalPictureName, this, _parentWindow);
 
-            var tipsWindow = new TipsWindow(pages, pictureName, this);
+            Hide();
             tipsWindow.Show();
         }
 
         private void HomeButton_OnClick(object sender, RoutedEventArgs e)
         {
+            _parentWindow.Show();
             this.Close();
+        }
+
+        private void HelpButton_OnClick(object sender, RoutedEventArgs e)
+        {
+            var helpWindow = new HelpWindow(StringConstants.FractalsHelp, this, _parentWindow);
+
+            Hide();
+            helpWindow.Show();
         }
     }
 }

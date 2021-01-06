@@ -26,5 +26,12 @@ namespace EasyGraphics
             this.Hide();
             colorSchemeWindow.Show();
         }
+
+        private void RectangleMoveButton_OnClick(object sender, RoutedEventArgs e)
+        {
+            var rectangleMoveWindow = new RectangleMoveWindow(this);
+            this.Hide();
+            rectangleMoveWindow.Show();
+        }
     }
 }

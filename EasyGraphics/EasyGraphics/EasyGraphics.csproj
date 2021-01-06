@@ -8,13 +8,16 @@
 
   <ItemGroup>
     <None Remove="fonts\BubblegumSans-Regular.ttf" />
+    <None Remove="images\AffinesHelp.jpg" />
     <None Remove="images\back.png" />
     <None Remove="images\book.png" />
     <None Remove="images\color-palette.png" />
+    <None Remove="images\ColorsHelp.jpg" />
     <None Remove="images\colorTip.jpg" />
     <None Remove="images\coordinates.png" />
     <None Remove="images\download.png" />
     <None Remove="images\fractal.png" />
+    <None Remove="images\FractalsHelp.jpg" />
     <None Remove="images\fractalTip.jpg" />
     <None Remove="images\home.png" />
     <None Remove="images\left.png" />
@@ -30,10 +33,15 @@
 
   <ItemGroup>
     <PackageReference Include="MathNet.Numerics" Version="3.13.1" />
+    <PackageReference Include="OxyPlot.Core" Version="2.0.0" />
+    <PackageReference Include="OxyPlot.Wpf" Version="2.0.0" />
   </ItemGroup>
 
   <ItemGroup>
     <Resource Include="fonts\BubblegumSans-Regular.ttf">
+      <CopyToOutputDirectory>Never</CopyToOutputDirectory>
+    </Resource>
+    <Resource Include="images\AffinesHelp.jpg">
       <CopyToOutputDirectory>Never</CopyToOutputDirectory>
     </Resource>
     <Resource Include="images\back.png">
@@ -41,12 +49,18 @@
     </Resource>
     <Resource Include="images\book.png" />
     <Resource Include="images\color-palette.png" />
+    <Resource Include="images\ColorsHelp.jpg">
+      <CopyToOutputDirectory>Never</CopyToOutputDirectory>
+    </Resource>
     <Resource Include="images\colorTip.jpg">
       <CopyToOutputDirectory>Never</CopyToOutputDirectory>
     </Resource>
     <Resource Include="images\coordinates.png" />
     <Resource Include="images\download.png" />
     <Resource Include="images\fractal.png" />
+    <Resource Include="images\FractalsHelp.jpg">
+      <CopyToOutputDirectory>Never</CopyToOutputDirectory>
+    </Resource>
     <Resource Include="images\fractalTip.jpg">
       <CopyToOutputDirectory>Never</CopyToOutputDirectory>
     </Resource>
