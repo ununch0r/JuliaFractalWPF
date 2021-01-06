@@ -62,11 +62,50 @@
                         <Grid>
                             <Border CornerRadius ="15" 
                                     Margin="20"
-                                    Background="#D3F7FF"
-                                    BorderThickness="1"
-                                    BorderBrush="#36213E">
+                                    Background="#63768D">
                                 <Grid>
-
+                                    <Grid.ColumnDefinitions>
+                                        <ColumnDefinition Width="0.175*"></ColumnDefinition>
+                                        <ColumnDefinition Width="0.15*"></ColumnDefinition>
+                                        <ColumnDefinition></ColumnDefinition>
+                                    </Grid.ColumnDefinitions>
+                                    <Grid.RowDefinitions>
+                                        <RowDefinition Height="0.25*"></RowDefinition>
+                                        <RowDefinition Height="0.15*"></RowDefinition>
+                                        <RowDefinition Height="0.15*"></RowDefinition>
+                                        <RowDefinition Height="0.15*"></RowDefinition>
+                                        <RowDefinition Height="0.25*"></RowDefinition>
+                                    </Grid.RowDefinitions>
+                                    <Border Grid.Row="0" Grid.Column="0"  Background="#D3F7FF" BorderThickness="5" CornerRadius="100" Margin="20" BorderBrush="#36213E">
+                                        <TextBlock DataContext="{Binding Path=CurrentQuestion}" Text="{Binding Path=Order}"
+                                                   FontSize="48" VerticalAlignment="Center" HorizontalAlignment="Center"
+                                                   Style="{StaticResource BubblegumSans}"
+                                                   Foreground="#36213E"></TextBlock>
+                                    </Border>
+                                    <Border Grid.Column="1" Grid.Row="0" Grid.ColumnSpan="2" Background="#D3F7FF" BorderThickness="5" Margin="5 25" CornerRadius="15">
+                                        <TextBlock DataContext="{Binding Path=CurrentQuestion}" Text="{Binding Path=Question}"
+                                                   FontSize="24" VerticalAlignment="Center" HorizontalAlignment="Center"
+                                                   Style="{StaticResource BubblegumSans}"
+                                                   Foreground="#36213E"></TextBlock>
+                                    </Border>
+                                    <Border Grid.Column="2" Grid.Row="1" Background="#D3F7FF" BorderThickness="5" Margin="25 5" CornerRadius="15">
+                                        <TextBlock DataContext="{Binding Path=CurrentQuestion}" Text="{Binding Path=Options[0]}"
+                                                   FontSize="24" VerticalAlignment="Center" HorizontalAlignment="Left"
+                                                   Style="{StaticResource BubblegumSans}"
+                                                   Foreground="#36213E"></TextBlock>
+                                    </Border>
+                                    <Border Grid.Column="2" Grid.Row="2" Background="#D3F7FF" BorderThickness="5" Margin="25 5" CornerRadius="15">
+                                        <TextBlock DataContext="{Binding Path=CurrentQuestion}" Text="{Binding Path=Options[1]}"
+                                                   FontSize="24" VerticalAlignment="Center" HorizontalAlignment="Left"
+                                                   Style="{StaticResource BubblegumSans}"
+                                                   Foreground="#36213E"></TextBlock>
+                                    </Border>
+                                    <Border Grid.Column="2" Grid.Row="3" Background="#D3F7FF" BorderThickness="5" Margin="25 5" CornerRadius="15">
+                                        <TextBlock DataContext="{Binding Path=CurrentQuestion}" Text="{Binding Path=Options[2]}"
+                                                   FontSize="24" VerticalAlignment="Center" HorizontalAlignment="Left"
+                                                   Style="{StaticResource BubblegumSans}"
+                                                   Foreground="#36213E"></TextBlock>
+                                    </Border>
                                 </Grid>
                             </Border>
                         </Grid>

@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Linq;
 using System.Text;
 using System.Windows;
 using System.Windows.Controls;
@@ -9,6 +10,8 @@ using System.Windows.Input;
 using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Shapes;
+using EasyGraphics.Constants;
+using EasyGraphics.ViewModels;
 
 namespace EasyGraphics.Views
 {
@@ -17,8 +20,16 @@ namespace EasyGraphics.Views
     /// </summary>
     public partial class QuizWindow : Window
     {
-        public QuizWindow()
+        private readonly Window _parentWindow;
+        public QuizWindow(Window parentWindow)
         {
+            _parentWindow = parentWindow;
+            var quizData = new QuizDataViewModel()
+            {
+                Questions = StringConstants.Questions
+            };
+            quizData.CurrentQuestion = quizData.Questions.First();
+            DataContext = quizData;
             InitializeComponent();
         }
 

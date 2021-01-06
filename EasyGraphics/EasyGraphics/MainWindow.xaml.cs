@@ -33,5 +33,12 @@ namespace EasyGraphics
             this.Hide();
             rectangleMoveWindow.Show();
         }
+
+        private void QuizButton_OnClick(object sender, RoutedEventArgs e)
+        {
+            var rectangleMoveWindow = new QuizWindow(this);
+            this.Hide();
+            rectangleMoveWindow.Show();
+        }
     }
 }
