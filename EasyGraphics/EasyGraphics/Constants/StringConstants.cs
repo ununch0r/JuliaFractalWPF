@@ -1,4 +1,5 @@
 ﻿using System.Collections.Generic;
+using System.Collections.ObjectModel;
 using EasyGraphics.ViewModels;
 
 namespace EasyGraphics.Constants
@@ -42,13 +43,13 @@ namespace EasyGraphics.Constants
             "A color palette is a set of current colors for specific images, presented in tabular form. The palette is used if you need to save resources.",
         };
 
-        public static readonly List<QuestionViewModel> Questions = new List<QuestionViewModel>
+        public static readonly ObservableCollection<QuestionViewModel> Questions = new ObservableCollection<QuestionViewModel>
         {
             new QuestionViewModel
             {
                 Question = "Why was a fourth component K added to the three-component CMY model?",
                 Order = 1,
-                Options = new List<string>
+                Options = new ObservableCollection<string>
                 {
                     "For practical purposes",
                     "Color palette optimization",
@@ -60,7 +61,7 @@ namespace EasyGraphics.Constants
             {
                 Question = "What is the HSV color model used for?",
                 Order = 2,
-                Options = new List<string>
+                Options = new ObservableCollection<string>
                 {
                     "To switch between subtractive and additive models",
                     "When you want to adjust color attributes",
@@ -72,7 +73,7 @@ namespace EasyGraphics.Constants
             {
                 Question = "Yellow in the HSV system is set by the values:",
                 Order = 3,
-                Options = new List<string>
+                Options = new ObservableCollection<string>
                 {
                     "(30º, 1, 1)",
                     "(60º, 1, 1)",
@@ -84,7 +85,7 @@ namespace EasyGraphics.Constants
             {
                 Question = "The color palette is used for:",
                 Order = 4,
-                Options = new List<string>
+                Options = new ObservableCollection<string>
                 {
                     "Compact image storage",
                     "Color interpolation",
@@ -96,7 +97,7 @@ namespace EasyGraphics.Constants
             {
                 Question = "Which color model is additive?",
                 Order = 5,
-                Options = new List<string>
+                Options = new ObservableCollection<string>
                 {
                     "RGB",
                     "HSV",
@@ -108,7 +109,7 @@ namespace EasyGraphics.Constants
             {
                 Question = "Which class of fractals does not exist?",
                 Order = 6,
-                Options = new List<string>
+                Options = new ObservableCollection<string>
                 {
                     "IFS",
                     "Geometric",
@@ -120,7 +121,7 @@ namespace EasyGraphics.Constants
             {
                 Question = "What space can be the result of affine transformations of 3D space?",
                 Order = 7,
-                Options = new List<string>
+                Options = new ObservableCollection<string>
                 {
                     "Only 3D",
                     "3D and 4D",

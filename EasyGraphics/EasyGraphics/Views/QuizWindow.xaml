@@ -58,7 +58,50 @@
                         <RowDefinition Height="0.30*"></RowDefinition>
                         <RowDefinition Height="0.7*"></RowDefinition>
                     </Grid.RowDefinitions>
-                    <Border CornerRadius ="15" Grid.Column="1" Background="#63768D" Grid.Row="1">
+                    <Border Visibility="Collapsed" x:Name="Result" CornerRadius ="15" Grid.Column="1" Background="#63768D" Grid.Row="1">
+                            <Grid>
+                                <Grid.RowDefinitions>
+                                    <RowDefinition></RowDefinition>
+                                    <RowDefinition Height="1.5*"></RowDefinition>
+                                    <RowDefinition></RowDefinition>
+                                </Grid.RowDefinitions>
+
+                            <Border Grid.Row="0" Background="#D3F7FF" BorderThickness="5" Margin="25" CornerRadius="40">
+                                <TextBlock x:Name="Greeting" Text="{Binding Path=Options[0], Mode=TwoWay}"
+                                           FontSize="48" VerticalAlignment="Center" HorizontalAlignment="Center"
+                                           Style="{StaticResource BubblegumSans}" Padding="20 0 0 0"
+                                           Foreground="#36213E">
+                                    Congratulations, you have passed the quiz!
+                                </TextBlock>
+                            </Border>
+
+                            <Border Grid.Row="1" Background="#D3F7FF" BorderThickness="5" Margin="25" Width="800" CornerRadius="40">
+                                <TextBlock x:Name="Score" Text="{Binding Path=Options[0], Mode=TwoWay}"
+                                           FontSize="96" VerticalAlignment="Center" HorizontalAlignment="Center"
+                                           Style="{StaticResource BubblegumSans}" Padding="20 0 0 0"
+                                           Foreground="#36213E">
+                                    Your score : 100%
+                                </TextBlock>
+                            </Border>
+
+                            <Button Grid.Row="2" Width="400"
+                                    x:Name="GetCertificate" BorderThickness="1" BorderBrush="#D3F7FF"  Height="100"
+                                    Background="#36213E" Foreground="#D3F7FF" HorizontalAlignment="Center" Click="GetCertificate_OnClick">
+                                        <Button.Resources>
+                                            <Style TargetType="Border">
+                                                <Setter Property="CornerRadius" Value="40 "/>
+                                            </Style>
+                                        </Button.Resources>
+                                        <StackPanel Orientation="Horizontal">
+                                            <TextBlock FontSize="48" TextAlignment="Center" Style="{StaticResource BubblegumSans}" HorizontalAlignment="Right"  VerticalAlignment="Top">
+                                                Download certificate
+                                            </TextBlock>
+                                        </StackPanel>
+                                </Button>
+
+                            </Grid>
+                    </Border>
+                    <Border  x:Name="QuestionsGrid"  CornerRadius ="15" Grid.Column="1" Background="#63768D" Grid.Row="1" Visibility="Visible">
                         <Grid>
                             <Border CornerRadius ="15" 
                                     Margin="20"
@@ -77,35 +120,60 @@
                                         <RowDefinition Height="0.25*"></RowDefinition>
                                     </Grid.RowDefinitions>
                                     <Border Grid.Row="0" Grid.Column="0"  Background="#D3F7FF" BorderThickness="5" CornerRadius="100" Margin="20" BorderBrush="#36213E">
-                                        <TextBlock DataContext="{Binding Path=CurrentQuestion}" Text="{Binding Path=Order}"
+                                        <TextBlock DataContext="{Binding Path=CurrentQuestion, Mode=TwoWay}" Text="{Binding Path=Order, Mode=TwoWay}"
                                                    FontSize="48" VerticalAlignment="Center" HorizontalAlignment="Center"
                                                    Style="{StaticResource BubblegumSans}"
                                                    Foreground="#36213E"></TextBlock>
                                     </Border>
                                     <Border Grid.Column="1" Grid.Row="0" Grid.ColumnSpan="2" Background="#D3F7FF" BorderThickness="5" Margin="5 25" CornerRadius="15">
-                                        <TextBlock DataContext="{Binding Path=CurrentQuestion}" Text="{Binding Path=Question}"
+                                        <TextBlock DataContext="{Binding Path=CurrentQuestion, Mode=TwoWay}" Text="{Binding Path=Question, Mode=TwoWay}"
                                                    FontSize="24" VerticalAlignment="Center" HorizontalAlignment="Center"
                                                    Style="{StaticResource BubblegumSans}"
                                                    Foreground="#36213E"></TextBlock>
                                     </Border>
                                     <Border Grid.Column="2" Grid.Row="1" Background="#D3F7FF" BorderThickness="5" Margin="25 5" CornerRadius="15">
-                                        <TextBlock DataContext="{Binding Path=CurrentQuestion}" Text="{Binding Path=Options[0]}"
+                                        <TextBlock DataContext="{Binding Path=CurrentQuestion, Mode=TwoWay}" Text="{Binding Path=Options[0], Mode=TwoWay}"
                                                    FontSize="24" VerticalAlignment="Center" HorizontalAlignment="Left"
-                                                   Style="{StaticResource BubblegumSans}"
+                                                   Style="{StaticResource BubblegumSans}" Padding="20 0 0 0"
                                                    Foreground="#36213E"></TextBlock>
                                     </Border>
                                     <Border Grid.Column="2" Grid.Row="2" Background="#D3F7FF" BorderThickness="5" Margin="25 5" CornerRadius="15">
-                                        <TextBlock DataContext="{Binding Path=CurrentQuestion}" Text="{Binding Path=Options[1]}"
+                                        <TextBlock DataContext="{Binding Path=CurrentQuestion, Mode=TwoWay}" Text="{Binding Path=Options[1], Mode=TwoWay}"
                                                    FontSize="24" VerticalAlignment="Center" HorizontalAlignment="Left"
-                                                   Style="{StaticResource BubblegumSans}"
+                                                   Style="{StaticResource BubblegumSans}" Padding="20 0 0 0"
                                                    Foreground="#36213E"></TextBlock>
                                     </Border>
                                     <Border Grid.Column="2" Grid.Row="3" Background="#D3F7FF" BorderThickness="5" Margin="25 5" CornerRadius="15">
-                                        <TextBlock DataContext="{Binding Path=CurrentQuestion}" Text="{Binding Path=Options[2]}"
+                                        <TextBlock DataContext="{Binding Path=CurrentQuestion, Mode=TwoWay}" Text="{Binding Path=Options[2], Mode=TwoWay}"
                                                    FontSize="24" VerticalAlignment="Center" HorizontalAlignment="Left"
-                                                   Style="{StaticResource BubblegumSans}"
+                                                   Style="{StaticResource BubblegumSans}" Padding="20 0 0 0"
                                                    Foreground="#36213E"></TextBlock>
                                     </Border>
+                                    
+                                    <Button Grid.Column="1" Grid.ColumnSpan="2" Grid.Row="4" 
+                                            x:Name="Answer" BorderThickness="1" BorderBrush="#36213E" Width="170" Height="80"
+                                            Background="#D3F7FF" HorizontalAlignment="Center" Click="Answer_OnClick">
+                                        <Button.Resources>
+                                            <Style TargetType="Border">
+                                                <Setter Property="CornerRadius" Value="40 "/>
+                                            </Style>
+                                        </Button.Resources>
+                                        <StackPanel Orientation="Horizontal">
+                                            <TextBlock FontSize="48" TextAlignment="Center" Style="{StaticResource BubblegumSans}" HorizontalAlignment="Right"  VerticalAlignment="Top">
+                                                Answer
+                                            </TextBlock>
+                                        </StackPanel>
+                                    </Button>
+
+                                    <Viewbox Grid.Row="1" Grid.Column="1" Margin="5"  HorizontalAlignment="Right" VerticalAlignment="Center">
+                                        <RadioButton GroupName="Questions" x:Name="FirstOption" IsChecked="True" Checked="FirstOption_OnChecked" ></RadioButton>
+                                    </Viewbox>
+                                    <Viewbox Grid.Row="2" Grid.Column="1" Margin="5"  HorizontalAlignment="Right" VerticalAlignment="Center">
+                                        <RadioButton GroupName="Questions" x:Name="SecondOption" Checked="SecondOption_OnChecked"></RadioButton>
+                                    </Viewbox>
+                                    <Viewbox Grid.Row="3" Grid.Column="1" Margin="5" HorizontalAlignment="Right" VerticalAlignment="Center">
+                                        <RadioButton GroupName="Questions" x:Name="ThirdOption" Checked="ThirdOption_OnChecked"></RadioButton>
+                                    </Viewbox>
                                 </Grid>
                             </Border>
                         </Grid>

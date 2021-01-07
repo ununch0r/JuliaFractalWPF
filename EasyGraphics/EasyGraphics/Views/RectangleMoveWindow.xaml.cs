@@ -6,9 +6,14 @@ using OxyPlot;
 using OxyPlot.Axes;
 using System;
 using System.ComponentModel;
+using System.IO;
 using System.Runtime.CompilerServices;
+using System.Text;
 using System.Windows;
 using System.Windows.Threading;
+using EasyGraphics.ViewModels;
+using System.Text.Json;
+using System.Text.Json.Serialization;
 
 namespace EasyGraphics.Views
 {
@@ -330,16 +335,6 @@ namespace EasyGraphics.Views
             tipsWindow.Show();
         }
 
-        private void DownloadButton_OnClick(object sender, RoutedEventArgs e)
-        {
-            
-        }
-
-        private void UploadButton_OnClick(object sender, RoutedEventArgs e)
-        {
-            
-        }
-
         private bool _reverseStep = false;
 
         private void Start_OnClick(object sender, RoutedEventArgs e)
@@ -556,6 +551,83 @@ namespace EasyGraphics.Views
 
             Hide();
             helpWindow.Show();
+        }
+
+        private void DownloadButton_OnClick(object sender, RoutedEventArgs e)
+        {
+            SaveCurrentPreset();
+        }
+
+        private void SaveCurrentPreset()
+        {
+            var preset = new Preset
+            {
+                AVertexX = AVertexXCoordinate,
+                AVertexY = AVertexYCoordinate,
+                BVertexX = BVertexXCoordinate,
+                BVertexY = BVertexYCoordinate,
+                CVertexX = CVertexXCoordinate,
+                CVertexY = CVertexYCoordinate,
+                DVertexX = DVertexXCoordinate,
+                DVertexY = DVertexYCoordinate,
+                DeltaVertexX = DeltaX,
+                DeltaVertexY = DeltaY
+            };
+
+            var json = JsonSerializer.Serialize(preset);
+            var filepath = Path.Combine(Environment.CurrentDirectory, "preset.json");
+            WriteToFile(filepath, json);
+        }
+
+        private static void WriteToFile(string filePath, string text)
+        {
+            using (var streamWriter = new StreamWriter(filePath, append: false, Encoding.Default))
+            {
+                streamWriter.WriteLine(text);
+            }
+        }
+
+        private static string ReadFromFile(string filePath)
+        {
+            using (var streamReader = new StreamReader(filePath))
+            {
+                var textFromFile = streamReader.ReadToEnd();
+                return textFromFile;
+            }
+        }
+
+        private void UploadButton_OnClick(object sender, RoutedEventArgs e)
+        {
+            ReadLastPreset();
+        }
+
+        private void ReadLastPreset()
+        {
+            var filepath = Path.Combine(Environment.CurrentDirectory, "preset.json");
+
+            if (!File.Exists(filepath))
+            {
+                SaveCurrentPreset();
+            }
+
+            var json = ReadFromFile(filepath);
+
+            var preset = JsonSerializer.Deserialize<Preset>(json);
+
+            AVertexXCoordinate = preset.AVertexX;
+            AVertexYCoordinate = preset.AVertexY;
+
+            BVertexXCoordinate = preset.BVertexX;
+            BVertexYCoordinate = preset.BVertexY;
+
+            CVertexXCoordinate = preset.CVertexX;
+            CVertexYCoordinate = preset.CVertexY;
+
+            DVertexXCoordinate = preset.DVertexX;
+            DVertexYCoordinate = preset.DVertexY;
+
+            DeltaX = preset.DeltaVertexX;
+            DeltaY = preset.DeltaVertexY;
         }
     }
 }

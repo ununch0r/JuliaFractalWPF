@@ -138,24 +138,17 @@
                                         <ColumnDefinition Width="105"></ColumnDefinition>
                                         <ColumnDefinition></ColumnDefinition>
                                     </Grid.ColumnDefinitions>
-                                    <Button Click="DownloadButton_OnClick" x:Name="DownloadButton" Grid.Column="0" BorderThickness="1 1 0 1" BorderBrush="#36213E" Width="85" Height="80" Background="#D3F7FF" HorizontalAlignment="Right">
+                                    <Button Click="DownloadButton_OnClick" x:Name="DownloadButton" Grid.Column="0" Grid.ColumnSpan="2"
+                                            BorderThickness="1"
+                                            BorderBrush="#36213E" Width="170"
+                                            Height="80" Background="#D3F7FF" HorizontalAlignment="Left" Margin="20">
                                         <Button.Resources>
                                             <Style TargetType="Border">
-                                                <Setter Property="CornerRadius" Value="40 0 0 40"/>
+                                                <Setter Property="CornerRadius" Value="40"/>
                                             </Style>
                                         </Button.Resources>
                                         <StackPanel Orientation="Horizontal">
                                             <Image Source="/images/download.png" Height="60" Width="60"/>
-                                        </StackPanel>
-                                    </Button>
-                                    <Button x:Name="UploadButton" Grid.Column="1" BorderThickness="0 1 1 1" BorderBrush="#36213E" Width="85" Height="80" Background="#D3F7FF" HorizontalAlignment="Left">
-                                        <Button.Resources>
-                                            <Style TargetType="Border">
-                                                <Setter Property="CornerRadius" Value=" 0 40 40 0"/>
-                                            </Style>
-                                        </Button.Resources>
-                                        <StackPanel Orientation="Horizontal">
-                                            <Image Source="/images/upload.png" Height="60" Width="60"/>
                                         </StackPanel>
                                     </Button>
                                 </Grid>
